@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import LandingSingInOptions from './LandingSingInOptions';
 import Header from './Header';
+import Footer from './Footer';
+import Feed from './Feed';
 
 import { UserSessionContext } from '../context/UserContext.js';
 
@@ -12,13 +14,18 @@ class Landing extends Component {
     render() {
         if (this.context.isValidSession()) {
             return (
-                <Header/>
-            );
+                <div>
+                    <Header/>
+                    <Feed/>
+                    <Footer/>
+                </div>
+                );
         } else {
             return (
                 <div>
                     <Header/>
                     <LandingSingInOptions/>
+                    <Footer/>
                 </div>
             );
         }

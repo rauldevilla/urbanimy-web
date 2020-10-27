@@ -30,11 +30,7 @@ class Header extends Component {
             );
         } else {
             return (
-                <Navbar.Collapse>
-                    <Nav>
-                        <Nav.Link href="#contact">Contact</Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
+                <div/>
             );
         }
     }
@@ -57,13 +53,16 @@ class Header extends Component {
     }
 
     render() {
+        const navToggle = (this.context.isValidSession() ? <Navbar.Toggle aria-controls="responsive-navbar-nav" /> : <div/>);
+        const userOptions = this.showUserOptions();
+        const userInfo = this.showUserInfo();
         return (
             <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="#home">{Configuration.APP_NAME}</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    {this.showUserOptions()}
-                    {this.showUserInfo()}
+                    {navToggle}
+                    {userOptions}
+                    {userInfo}
                 </Navbar>
             </div>
 
