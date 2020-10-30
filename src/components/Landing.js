@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import LandingSingInOptions from './LandingSingInOptions';
 import Header from './Header';
 import Footer from './Footer';
+import FooterBar from './FooterBar';
 import Feed from './Feed';
 
 import { UserSessionContext } from '../context/UserContext.js';
@@ -17,7 +18,7 @@ class Landing extends Component {
                 <div>
                     <Header/>
                     <Feed/>
-                    <Footer/>
+                    <FooterBar/>
                 </div>
                 );
         } else {
