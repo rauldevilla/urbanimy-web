@@ -1,0 +1,10 @@
+#footer-bar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: greenyellow;
+    color: white;
+    text-align: center;
+    display: table;
+}

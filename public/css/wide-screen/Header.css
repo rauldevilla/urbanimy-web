@@ -1,4 +1,7 @@
 #header-container {
+}
+
+#header-first-line{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -26,4 +29,11 @@
     font-family: 'Prompt', sans-serif;;
     font-size: x-large;
     font-weight: bold;
+}
+
+
+#header-second-line {
+    width: 100%;
+    height: 30px;
+    background-color: red;
 }

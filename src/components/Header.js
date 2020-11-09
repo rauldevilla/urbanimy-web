@@ -5,8 +5,6 @@ import { Configuration } from '../config/Constants';
 
 import { UserSessionContext } from '../context/UserContext.js';
 
-import './Header.css';
-
 class Header extends Component {
 
     static contextType = UserSessionContext;
@@ -15,10 +13,13 @@ class Header extends Component {
         const avatar = (this.context.isValidSession() ? <Image src={this.context.getUserProfile().imageUrl} roundedCircle style={{width: "38px"}}/> : <div/>);
         return (
             <div id="header-container">
-                <div id="header-app-name"><div id="header-app-title">{Configuration.APP_NAME}</div></div>
-                <div id="header-user-avatar">
-                    {avatar}
-                </div>
+                <section id="header-first-line">
+                    <div id="header-app-name"><div id="header-app-title">{Configuration.APP_NAME}</div></div>
+                    <div id="header-user-avatar">
+                        {avatar}
+                    </div>
+                </section>
+                <section id="header-second-line"></section>
             </div>
 
         );
