@@ -6,7 +6,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    background-color: #bbb;
+    background-color: #e30745;
 }
 
 #header-app-name {
@@ -14,6 +14,7 @@
     text-align: left;
     height: 50px;
     vertical-align: middle;
+    color: white;
 }
 
 #header-user-avatar {

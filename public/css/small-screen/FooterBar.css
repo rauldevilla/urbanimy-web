@@ -3,8 +3,20 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: greenyellow;
     color: white;
     text-align: center;
     display: table;
+}
+
+.footer-bar-button {
+    background-color: #e30745;
+    border-style: solid;
+    border-color: white;
+    width: 30%;
+}
+
+.footer-bar-icon {
+    color: white;
+    width: 3em;
+    height: 3em;
 }
