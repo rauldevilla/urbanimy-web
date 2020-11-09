@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image'
 
+import Menu from './Menu';
+
 import { Configuration } from '../config/Constants';
 
 import { UserSessionContext } from '../context/UserContext.js';
@@ -19,7 +21,9 @@ class Header extends Component {
                         {avatar}
                     </div>
                 </section>
-                <section id="header-second-line"></section>
+                <div style={{display: (this.context.isValidSession() ? "block" : "none")}}>
+                    <section id="header-second-line" ><Menu/></section>
+                </div>
             </div>
 
         );

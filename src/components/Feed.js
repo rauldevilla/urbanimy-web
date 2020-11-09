@@ -4,7 +4,7 @@ class Feed extends Component {
 
     render() {
         return (
-            <div style={{height: '200px'}}>Feed</div>
+            <div style={{width: "100%"}}>Feed</div>
         );
     }
 
