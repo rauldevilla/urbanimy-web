@@ -4,23 +4,47 @@ import { FaHome } from 'react-icons/fa';
 import { FaCalendarDay } from 'react-icons/fa';
 import { FaUserCog } from 'react-icons/fa';
 
-//import Container from 'react-bootstrap/Container';
-//import Row from 'react-bootstrap/Row';
-//import Col from 'react-bootstrap/Col';
+import { UserSessionContext } from '../context/UserContext.js';
 
 class FooterBar extends Component {
+
+    static contextType = UserSessionContext;
+
+    CONFIG_BUTTON = () => {
+        return <FaUserCog className="footer-bar-icon"/>;
+    }
+
+    HOME_BUTTON = () => {
+        return <FaHome className="footer-bar-icon"/>;
+    }
+
+    leftButton = () => {
+        if (this.context.isRightHandUser()) {
+            return this.CONFIG_BUTTON();
+        } else {
+            return this.HOME_BUTTON();
+        }
+    }
+
+    rightButton = () => {
+        if (this.context.isRightHandUser()) {
+            return this.HOME_BUTTON();
+        } else {
+            return this.CONFIG_BUTTON();
+        }
+    }
 
     render() {
         return (
             <div id="footer-bar">
                 <Button className="footer-bar-button" variant="outline-dark">
-                    <FaUserCog className="footer-bar-icon"/>
+                    {this.leftButton()}
                 </Button>
                 <Button className="footer-bar-button" variant="outline-dark">
                     <FaCalendarDay className="footer-bar-icon"/>
                 </Button>
                 <Button className="footer-bar-button" variant="outline-dark">
-                    <FaHome className="footer-bar-icon"/>
+                    {this.rightButton()}
                 </Button>
             </div>
         );

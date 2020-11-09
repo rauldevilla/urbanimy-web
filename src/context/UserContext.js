@@ -4,6 +4,7 @@ export const UserSessionContext = createContext();
 
 class UserSessionContextProvider extends Component {
     state = {
+        rightHandUser: true,
         userProfile: null
     }
 
@@ -19,6 +20,10 @@ class UserSessionContextProvider extends Component {
         return this.state.userProfile;
     }
 
+    isRightHandUser = () => {
+        return this.state.rightHandUser;
+    }
+
     render() {
         return (
             <UserSessionContext.Provider 
@@ -26,7 +31,8 @@ class UserSessionContextProvider extends Component {
                     {...this.state, 
                         setUserProfile: this.setUserProfile, 
                         isValidSession: this.isValidSession,
-                        getUserProfile: this.getUserProfile
+                        getUserProfile: this.getUserProfile,
+                        isRightHandUser: this.isRightHandUser
                     }
                 }>
                     {this.props.children}

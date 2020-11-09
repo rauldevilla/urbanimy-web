@@ -7,3 +7,20 @@
     color: white;
     text-align: center;
 }
+
+#footer-contact-info {
+    color: white;
+}
+
+#footer-contact-info a {
+    color: white;
+}
+
+#footer-contact-info a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+#footer-contact-info a:hover {
+    text-decoration: none;
+}
