@@ -15,7 +15,7 @@ class Landing extends Component {
     render() {
         if (this.context.isValidSession()) {
             return (
-                <div>
+                <div id="landing-container">
                     <Header/>
                     <Feed/>
                     <FooterBar/>
@@ -23,7 +23,7 @@ class Landing extends Component {
                 );
         } else {
             return (
-                <div>
+                <div id="landing-container">
                     <Header/>
                     <LandingSingInOptions/>
                     <Footer/>
