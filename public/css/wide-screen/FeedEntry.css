@@ -1,3 +1,33 @@
 #feed-entry {
     margin: 0px 20px 20px 30px;
 }
+
+
+#feed-entry-header-container {
+    overflow: auto;
+    height: 55px;
+}
+
+#feed-entry-header-container-left {
+    float: left;
+    height: 100%;
+}
+
+#feed-entry-header-container-left img {
+    display: block;
+    height: 44px;
+    margin-top: 5px;
+    border-radius: 50%;
+    box-shadow: 1px 1px #ffd1d7;
+}
+
+#feed-entry-header-container-right {
+    height: 100%;
+    width: 100%;
+}
+
+#feed-entry-title {
+    display: inline-block;
+    margin: 15px 0px 0px 10px;
+}
+
