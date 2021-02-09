@@ -12,12 +12,16 @@ class Landing extends Component {
 
     static contextType = UserSessionContext;
 
+    contentPanel = () => {
+        return <Feed/>;
+    }
+
     render() {
         if (this.context.isValidSession()) {
             return (
                 <div id="landing-container">
                     <Header/>
-                    <Feed/>
+                    {this.contentPanel()}
                     <FooterBar/>
                 </div>
                 );
