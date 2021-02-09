@@ -15,7 +15,15 @@ class FooterBar extends Component {
     }
 
     HOME_BUTTON = () => {
-        return <FaHome className="footer-bar-icon"/>;
+        return <FaHome className="footer-bar-icon" />;
+    }
+
+    RESERVE_BUTTON = () => {
+        return <FaCalendarDay className="footer-bar-icon" onClick={this.reserve}/>;
+    }
+
+    reserve = () => {
+        this.context.startReserve();
     }
 
     leftButton = () => {
@@ -34,6 +42,10 @@ class FooterBar extends Component {
         }
     }
 
+    middleButton = () => {
+        return this.RESERVE_BUTTON();
+    }
+
     render() {
         return (
             <div id="footer-bar">
@@ -41,7 +53,7 @@ class FooterBar extends Component {
                     {this.leftButton()}
                 </Button>
                 <Button className="footer-bar-button" variant="outline-dark">
-                    <FaCalendarDay className="footer-bar-icon"/>
+                    {this.middleButton()}
                 </Button>
                 <Button className="footer-bar-button" variant="outline-dark">
                     {this.rightButton()}

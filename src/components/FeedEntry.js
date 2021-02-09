@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { Configuration } from '../config/Constants';
-
 class FeedEntry extends Component {
 
     getImageUrl = () => {

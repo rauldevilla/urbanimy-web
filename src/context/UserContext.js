@@ -5,7 +5,8 @@ export const UserSessionContext = createContext();
 class UserSessionContextProvider extends Component {
     state = {
         rightHandUser: true,
-        userProfile: null
+        userProfile: null,
+        reserveStarted: false
     }
 
     setUserProfile = (profile) => {
@@ -28,6 +29,15 @@ class UserSessionContextProvider extends Component {
         return this.state.rightHandUser;
     }
 
+    isReserveStarted = () => {
+        return this.state.reserveStarted;
+    }
+
+    startReserve = () => {
+        console.log("Reserve started !");
+        this.setState({reserveStarted: true});
+    }
+
     render() {
         return (
             <UserSessionContext.Provider 
@@ -36,7 +46,9 @@ class UserSessionContextProvider extends Component {
                         setUserProfile: this.setUserProfile, 
                         isValidSession: this.isValidSession,
                         getUserProfile: this.getUserProfile,
-                        isRightHandUser: this.isRightHandUser
+                        isRightHandUser: this.isRightHandUser,
+                        isReserveStarted: this.isReserveStarted,
+                        startReserve: this.startReserve
                     }
                 }>
                     {this.props.children}
