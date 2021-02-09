@@ -17,8 +17,7 @@
     display: block;
     height: 44px;
     margin-top: 5px;
-    border-radius: 50%;
-    box-shadow: 1px 1px #ffd1d7;
+    border-radius: 5%;
 }
 
 #feed-entry-header-container-right {
@@ -31,3 +30,11 @@
     margin: 15px 0px 0px 10px;
 }
 
+#feed-entry-no-img-div {
+    margin-top: 10px;
+    height: 100%;
+    width: 44px;
+    height: 34px;
+    border-radius: 10%;
+    background-color: lightgrey;
+}
