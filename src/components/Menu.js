@@ -12,11 +12,15 @@ class Menu extends Component {
         this.context.startReserve();
     }
 
+    home = () => {
+        this.context.goHome();
+    }
+
     render() {
         return (
             <div style={{display: (this.context.isValidSession() ? "block" : "none")}}>
                 <Navbar bg="light">
-                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="#home" onClick={this.home}>Home</Nav.Link>
                     <Nav.Link href="#link" onClick={this.reserve}>Reserve</Nav.Link>
                     <Nav.Link href="#link">Settings</Nav.Link>
                 </Navbar>

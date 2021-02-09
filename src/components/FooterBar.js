@@ -15,7 +15,7 @@ class FooterBar extends Component {
     }
 
     HOME_BUTTON = () => {
-        return <FaHome className="footer-bar-icon" />;
+        return <FaHome className="footer-bar-icon" onClick={this.home}/>;
     }
 
     RESERVE_BUTTON = () => {
@@ -24,6 +24,10 @@ class FooterBar extends Component {
 
     reserve = () => {
         this.context.startReserve();
+    }
+
+    home = () => {
+        this.context.goHome();
     }
 
     leftButton = () => {

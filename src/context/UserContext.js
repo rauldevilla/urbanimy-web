@@ -34,8 +34,11 @@ class UserSessionContextProvider extends Component {
     }
 
     startReserve = () => {
-        console.log("Reserve started !");
         this.setState({reserveStarted: true});
+    }
+
+    goHome = () => {
+        this.setState({reserveStarted: false});
     }
 
     render() {
@@ -48,7 +51,8 @@ class UserSessionContextProvider extends Component {
                         getUserProfile: this.getUserProfile,
                         isRightHandUser: this.isRightHandUser,
                         isReserveStarted: this.isReserveStarted,
-                        startReserve: this.startReserve
+                        startReserve: this.startReserve,
+                        goHome: this.goHome
                     }
                 }>
                     {this.props.children}
