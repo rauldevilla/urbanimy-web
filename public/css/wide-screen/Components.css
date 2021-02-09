@@ -1,0 +1,21 @@
+.container {
+    margin: 10px 10px 10px 30px;
+    width: 100%;
+    background-color: magenta;
+    box-sizing: border-box;
+}
+
+input[type=text],
+select,
+textarea {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
