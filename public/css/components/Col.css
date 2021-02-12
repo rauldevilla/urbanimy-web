@@ -10,7 +10,9 @@
     margin-top: 6px;
 }
 
-.row {
+.col-100 {
+    float: left;
     width: 100%;
-    box-sizing: border-box;
+    margin-top: 6px;
 }
+
