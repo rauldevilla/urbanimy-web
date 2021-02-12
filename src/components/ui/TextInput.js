@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class TextInput extends Component {
     render() {
-        return <input type="text" {...this.props} />
+        return <input className="text-input" type="text" {...this.props} />
     }
 }
 
