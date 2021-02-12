@@ -1,0 +1,8 @@
+.dropdown-component {
+    width: 97%;
+    padding: 12px;
+    margin: 0px 0px 0px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}

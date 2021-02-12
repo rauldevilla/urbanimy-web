@@ -7,7 +7,10 @@ export const Configuration = {
             "name": "Nombre",
             "menu-home": "Inicio",
             "menu-reserve": "Reservar",
-            "menu-settings": "Configuración"
+            "menu-settings": "Configuración",
+            "location": "Ubicación",
+            "reserve-scree-title": "Reservar",
+            "reserve-scree-description": "Selecciona la ubicación que deseas reservar y la fecha en que la necesitas"
         }
     }
 };
