@@ -26,7 +26,8 @@ class Reserve extends Component {
         super(props);
         this.state = {
             userAvailableLocations: [],
-            userAvailableResources: []
+            userAvailableResources: [],
+            resourceReserveAvailableDuration: []
         };
     }
 
@@ -41,8 +42,8 @@ class Reserve extends Component {
         );
     }
 
-    loadAvailableResources = (e) => {
-        getUserResourcesInLocation(e.target.value,
+    loadAvailableResources = (resourceId) => {
+        getUserResourcesInLocation(resourceId,
             (resourcesArray) => {
                 this.setState({userAvailableResources: resourcesArray});
             },
@@ -50,6 +51,10 @@ class Reserve extends Component {
                 console.error(error);
             }
         );
+    }
+
+    onLocationChange = (e) => {
+        this.loadAvailableResources(e.target.value);
     }
 
     componentDidMount = () => {
@@ -67,7 +72,7 @@ class Reserve extends Component {
                         <Label>{this.internationalization.getLabel('location')}</Label>
                     </Col>
                     <Col size="M">
-                        <Dropdown onChange={this.loadAvailableResources}>
+                        <Dropdown onChange={this.onLocationChange}>
                             <option>{this.internationalization.getLabel('select-one-location')}</option>
                             {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
                         </Dropdown>
@@ -77,6 +82,17 @@ class Reserve extends Component {
                 <Row>
                     <Col size="S">
                         <Label>{this.internationalization.getLabel('resource')}</Label>
+                    </Col>
+                    <Col size="M">
+                        <Dropdown>
+                            {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
+                        </Dropdown>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col size="S">
+                        <Label>{this.internationalization.getLabel('duration')}</Label>
                     </Col>
                     <Col size="M">
                         <Dropdown>
@@ -100,7 +116,7 @@ class Reserve extends Component {
                 </Row>
 
                 <Row>
-                    <Col size="L" style={{textAlign: "center", }}>
+                    <Col size="L" style={{textAlign: "center"}}>
                         <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
                     </Col>
                 </Row>

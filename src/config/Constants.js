@@ -14,6 +14,7 @@ export const Configuration = {
             "select-one-location": "Seleccione una ubicación",
             "resource": "Recurso",
             "reserve-scree-title": "Reservar",
+            "duration": "Duración",
             "reserve-scree-description": "Selecciona la ubicación que deseas reservar y la fecha en que la necesitas",
             "search-availability": "Ver disponibilidad",
             "months": [
