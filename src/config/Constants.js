@@ -6,6 +6,7 @@ export const Configuration = {
         LABELS: {
             "name": "Nombre",
             "date": "Fecha",
+            "time": "Hora",
             "menu-home": "Inicio",
             "menu-reserve": "Reservar",
             "menu-settings": "Configuración",

@@ -10,7 +10,7 @@ const YEARS = [
     2020, 2021, 2022
 ];
 
-class Calendar extends Component {
+class DatePicker extends Component {
 
     internationalization = new Internationalization();
 
@@ -53,4 +53,4 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+export default DatePicker;
