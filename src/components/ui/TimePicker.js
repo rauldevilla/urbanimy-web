@@ -10,6 +10,7 @@ const HOURS = [
 //    41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59
 //];
 
+const MINUTES_INTERVAL = 15;
 const MINUTES = [
     0,15,30,45
 ];
@@ -35,6 +36,13 @@ class TimePicker extends Component {
         );
     }
 
+    getDefaultValueForMinute = () => {
+        if (this.state.currentTime.minute > 45) {
+            return 0;
+        }
+        return Math.ceil(this.state.currentTime.minute / MINUTES_INTERVAL) * MINUTES_INTERVAL
+    }
+
     render() {
         return (
             <div id="time-picker">
@@ -42,7 +50,7 @@ class TimePicker extends Component {
                     {HOURS.map((hour) => <option value={hour} key={hour}>{hour}</option>)}
                 </select>
                 <span>:</span>
-                <select className="timepicker-element" defaultValue={this.selectCurrentTime() ? this.state.currentTime.minute : ""}>
+                <select className="timepicker-element" defaultValue={this.selectCurrentTime() ? this.getDefaultValueForMinute() : ""}>
                     {MINUTES.map((minute) => <option value={minute} key={minute}>{minute}</option>)}
                 </select>
             </div>

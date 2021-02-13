@@ -13,6 +13,7 @@ import { UserSessionContext } from '../context/UserContext.js';
 import Internationalization from '../config/Internationalizacion';
 
 import { getUserLocations } from '../services/UserLocationServices';
+import { getUserResourcesInLocation } from '../services/UserLocationServices';
 
 class Reserve extends Component {
 
@@ -23,7 +24,8 @@ class Reserve extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userAvailableLocations: []
+            userAvailableLocations: [],
+            userAvailableResources: []
         };
     }
 
@@ -31,6 +33,17 @@ class Reserve extends Component {
         getUserLocations(this.context.getUserProfile(),
             (locationsArray) => {
                 this.setState({userAvailableLocations: locationsArray});
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
+    }
+
+    loadAvailableResources = (e) => {
+        getUserResourcesInLocation(e.target.value,
+            (resourcesArray) => {
+                this.setState({userAvailableResources: resourcesArray});
             },
             (error) => {
                 console.error(error);
@@ -53,8 +66,20 @@ class Reserve extends Component {
                         <Label>{this.internationalization.getLabel('location')}</Label>
                     </Col>
                     <Col size="M">
-                        <Dropdown>
+                        <Dropdown onChange={this.loadAvailableResources}>
+                            <option>{this.internationalization.getLabel('select-one-location')}</option>
                             {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
+                        </Dropdown>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col size="S">
+                        <Label>{this.internationalization.getLabel('resource')}</Label>
+                    </Col>
+                    <Col size="M">
+                        <Dropdown>
+                            {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
                         </Dropdown>
                     </Col>
                 </Row>
@@ -70,7 +95,7 @@ class Reserve extends Component {
                     <Col size="S">
                         <Label>{this.internationalization.getLabel('time')}</Label>
                     </Col>
-                    <Col size="M"><TimePicker /></Col>
+                    <Col size="M"><TimePicker selectCurrenTime={true}/></Col>
                 </Row>
             </div>
         );
