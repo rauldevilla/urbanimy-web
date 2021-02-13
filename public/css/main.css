@@ -9,7 +9,7 @@ html, body, #root, #root>div {
 }
 
 .scree-section-description {
-    color: lightgrey;
+    color: #ec99b8;
     font-size: small;
     margin: -15px 0px 20px 0px;
 }
