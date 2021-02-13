@@ -19,7 +19,7 @@ class Col extends Component {
     }
 
     render() {
-        return <div className={this.getColWidthClassName()}>{this.props.children}</div>
+        return <div className={this.getColWidthClassName()} {...this.props}>{this.props.children}</div>
     }
 }
 

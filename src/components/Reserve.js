@@ -7,6 +7,7 @@ import Label from './ui/Label';
 import Dropdown from './ui/Dropdown';
 import DatePicker from './ui/DatePicker';
 import TimePicker from './ui/TimePicker'
+import Button from './ui/Button'
 
 import { UserSessionContext } from '../context/UserContext.js';
 
@@ -96,6 +97,12 @@ class Reserve extends Component {
                         <Label>{this.internationalization.getLabel('time')}</Label>
                     </Col>
                     <Col size="M"><TimePicker selectCurrenTime={true}/></Col>
+                </Row>
+
+                <Row>
+                    <Col size="L" style={{textAlign: "center", }}>
+                        <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
+                    </Col>
                 </Row>
             </div>
         );

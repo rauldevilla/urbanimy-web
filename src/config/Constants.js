@@ -15,6 +15,7 @@ export const Configuration = {
             "resource": "Recurso",
             "reserve-scree-title": "Reservar",
             "reserve-scree-description": "Selecciona la ubicación que deseas reservar y la fecha en que la necesitas",
+            "search-availability": "Ver disponibilidad",
             "months": [
                 {id: 1, name: "Enero"},
                 {id: 2, name: "Febrero"},
