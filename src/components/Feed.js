@@ -33,12 +33,10 @@ const FEEDS = [
 
 class Feed extends Component {
 
-    entryKey = 0;
-
     getFeeds = () => {
         return (
-                FEEDS.map((feed) =>
-                    <FeedEntry title={feed.title} content={feed.content} imageUrl={feed.imageUrl} key={this.entryKey++}/>
+                FEEDS.map((feed, index) =>
+                    <FeedEntry title={feed.title} content={feed.content} imageUrl={feed.imageUrl} key={index}/>
                 )
         );
     }

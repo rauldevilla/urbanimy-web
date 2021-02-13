@@ -5,6 +5,7 @@ import Col from './ui/Col';
 import Label from './ui/Label';
 //import TextInput from './ui/TextInput';
 import Dropdown from './ui/Dropdown';
+import Calendar from './ui/Calendar';
 
 import { UserSessionContext } from '../context/UserContext.js';
 
@@ -37,7 +38,7 @@ class Reserve extends Component {
     }
 
     componentDidMount = () => {
-        this.loadUserAvailableLocations({})
+        this.loadUserAvailableLocations();
     }
 
     render() {
@@ -55,6 +56,13 @@ class Reserve extends Component {
                             {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
                         </Dropdown>
                     </Col>
+                </Row>
+
+                <Row>
+                    <Col size="S">
+                        <Label>{this.internationalization.getLabel('date')}</Label>
+                    </Col>
+                    <Col size="M"><Calendar selectCurrenDate={true}/></Col>
                 </Row>
             </div>
         );

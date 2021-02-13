@@ -12,5 +12,6 @@ const USER_LOCATIONS = [
 
 
 export const getUserLocations = (user, onSuccess, onError) => {
+    console.log("loading avaliable locations for " + user.email);
     onSuccess(USER_LOCATIONS);
 };
