@@ -6,7 +6,8 @@ class UserSessionContextProvider extends Component {
     state = {
         rightHandUser: true,
         userProfile: null,
-        reserveStarted: false
+        reserveStarted: false,
+        DEV_MODE: true
     }
 
     setUserProfile = (profile) => {
@@ -14,15 +15,22 @@ class UserSessionContextProvider extends Component {
     }
 
     isValidSession = () => {
-        //return this.state.userProfile != null;
-        return true;
+        if (this.state.DEV_MODE) {
+            return true;
+        } else {
+            return this.state.userProfile != null;
+        }
     }
 
     getUserProfile = () => {
-        //return this.state.userProfile;
-        return {
-            imageUrl: "https://cdn2.f-cdn.com/contestentries/1316431/24595406/5ae8a3f2e4e98_thumb900.jpg"
-        };
+        if (this.state.DEV_MODE) {
+            return {
+                email: "raul.devilla@gmail.com",
+                imageUrl: "./img/avatar-man-default.png"
+            };
+        } else {
+            return this.state.userProfile;
+        }
     }
 
     isRightHandUser = () => {
