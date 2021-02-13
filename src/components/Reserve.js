@@ -6,6 +6,7 @@ import Label from './ui/Label';
 //import TextInput from './ui/TextInput';
 import Dropdown from './ui/Dropdown';
 import DatePicker from './ui/DatePicker';
+import TimePicker from './ui/TimePicker'
 
 import { UserSessionContext } from '../context/UserContext.js';
 
@@ -62,14 +63,14 @@ class Reserve extends Component {
                     <Col size="S">
                         <Label>{this.internationalization.getLabel('date')}</Label>
                     </Col>
-                    <Col size="M"><Calendar selectCurrenDate={true}/></Col>
+                    <Col size="M"><DatePicker selectCurrenDate={true}/></Col>
                 </Row>
 
                 <Row>
                     <Col size="S">
                         <Label>{this.internationalization.getLabel('time')}</Label>
                     </Col>
-                    <Col size="M"><DatePicker selectCurrenDate={true}/></Col>
+                    <Col size="M"><TimePicker /></Col>
                 </Row>
             </div>
         );

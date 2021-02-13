@@ -7,7 +7,7 @@ const DAYS = [
 ];
 
 const YEARS = [
-    2020, 2021, 2022
+    2020, 2021, 2022, 2023, 2024, 2025
 ];
 
 class DatePicker extends Component {
@@ -37,15 +37,15 @@ class DatePicker extends Component {
     render() {
         return (
             <div>
-                <select className="calendar-component" defaultValue={this.selectCurrentDate() ? this.state.currentDate.day : ""}>
+                <select className="datepicker-element" defaultValue={this.selectCurrentDate() ? this.state.currentDate.day : ""}>
                     {DAYS.map((day) => <option value={day} key={day}>{day}</option>)}
                 </select>
-                <select className="calendar-component" defaultValue={this.selectCurrentDate() ? this.state.currentDate.month : ""}>
+                <select className="datepicker-element" defaultValue={this.selectCurrentDate() ? this.state.currentDate.month : ""}>
                     {this.internationalization.getLabel('months').map((month) => 
                          <option value={month.id} key={month.id}>{month.name}</option>
                     )}
                 </select>
-                <select className="calendar-component" defaultValue={this.selectCurrentDate() ? this.state.currentDate.year : ""}>
+                <select className="datepicker-element" defaultValue={this.selectCurrentDate() ? this.state.currentDate.year : ""}>
                     {YEARS.filter((year) => year >= this.state.currentDate.year).map((year) => <option value={year} key={year}>{year}</option>)}
                 </select>
             </div>
