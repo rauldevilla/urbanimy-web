@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 import Row from './ui/Row';
 import Col from './ui/Col';
 import Label from './ui/Label';
-//import TextInput from './ui/TextInput';
 import Dropdown from './ui/Dropdown';
 import DatePicker from './ui/DatePicker';
-import TimePicker from './ui/TimePicker'
-import Button from './ui/Button'
+import Button from './ui/Button';
+import Scheduler from './ui/Scheduler';
 
 import { UserSessionContext } from '../context/UserContext.js';
 
@@ -63,62 +62,63 @@ class Reserve extends Component {
 
     render() {
         return (
-            <div id="reserve-container" >
-                <p className="scree-title">{this.internationalization.getLabel('reserve-scree-title')}</p>
-                <p className="scree-section-description">{this.internationalization.getLabel('reserve-scree-description')}</p>
-                
-                <Row>
-                    <Col size="S">
-                        <Label>{this.internationalization.getLabel('location')}</Label>
-                    </Col>
-                    <Col size="M">
-                        <Dropdown onChange={this.onLocationChange}>
-                            <option>{this.internationalization.getLabel('select-one-location')}</option>
-                            {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
-                        </Dropdown>
-                    </Col>
-                </Row>
+            <div>
+                <div id="reserve-container">
+                    <Col size="L">
+                        <p className="scree-title">{this.internationalization.getLabel('reserve-scree-title')}</p>
+                        <p className="scree-section-description">{this.internationalization.getLabel('reserve-scree-description')}</p>
+                        
+                        <Row>
+                            <Col size="S">
+                                <Label>{this.internationalization.getLabel('location')}</Label>
+                            </Col>
+                            <Col size="M">
+                                <Dropdown onChange={this.onLocationChange}>
+                                    <option>{this.internationalization.getLabel('select-one-location')}</option>
+                                    {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
+                                </Dropdown>
+                            </Col>
+                        </Row>
 
-                <Row>
-                    <Col size="S">
-                        <Label>{this.internationalization.getLabel('resource')}</Label>
-                    </Col>
-                    <Col size="M">
-                        <Dropdown>
-                            {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
-                        </Dropdown>
-                    </Col>
-                </Row>
+                        <Row>
+                            <Col size="S">
+                                <Label>{this.internationalization.getLabel('resource')}</Label>
+                            </Col>
+                            <Col size="M">
+                                <Dropdown>
+                                    {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
+                                </Dropdown>
+                            </Col>
+                        </Row>
 
-                <Row>
-                    <Col size="S">
-                        <Label>{this.internationalization.getLabel('duration')}</Label>
-                    </Col>
-                    <Col size="M">
-                        <Dropdown>
-                            {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
-                        </Dropdown>
-                    </Col>
-                </Row>
+                        <Row>
+                            <Col size="S">
+                                <Label>{this.internationalization.getLabel('duration')}</Label>
+                            </Col>
+                            <Col size="M">
+                                <Dropdown>
+                                    {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
+                                </Dropdown>
+                            </Col>
+                        </Row>
 
-                <Row>
-                    <Col size="S">
-                        <Label>{this.internationalization.getLabel('date')}</Label>
-                    </Col>
-                    <Col size="M"><DatePicker selectCurrenDate={true}/></Col>
-                </Row>
+                        <Row>
+                            <Col size="S">
+                                <Label>{this.internationalization.getLabel('date')}</Label>
+                            </Col>
+                            <Col size="M"><DatePicker selectCurrenDate={true}/></Col>
+                        </Row>
 
-                <Row>
-                    <Col size="S">
-                        <Label>{this.internationalization.getLabel('time')}</Label>
-                    </Col>
-                    <Col size="M"><TimePicker selectCurrenTime={true}/></Col>
-                </Row>
 
-                <Row>
-                    <Col size="L" style={{textAlign: "center"}}>
-                        <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
+                        <Row>
+                            <Col size="L" style={{textAlign: "center"}}>
+                                <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
+                            </Col>
+                        </Row>
                     </Col>
+                </div>
+                <Row>
+                    <Scheduler />
                 </Row>
             </div>
         );
