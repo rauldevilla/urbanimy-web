@@ -4,7 +4,7 @@ class Scheduler extends Component {
 
     render() {
         return (
-            <div id="scheduler-component-container">
+            <div id="scheduler-component-container" {...this.props}>
                 Scheduler
             </div>
         );

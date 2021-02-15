@@ -62,64 +62,63 @@ class Reserve extends Component {
 
     render() {
         return (
-            <div>
-                <div id="reserve-container">
-                    <Col size="L">
-                        <p className="scree-title">{this.internationalization.getLabel('reserve-scree-title')}</p>
-                        <p className="scree-section-description">{this.internationalization.getLabel('reserve-scree-description')}</p>
-                        
-                        <Row>
-                            <Col size="S">
-                                <Label>{this.internationalization.getLabel('location')}</Label>
-                            </Col>
-                            <Col size="M">
-                                <Dropdown onChange={this.onLocationChange}>
-                                    <option>{this.internationalization.getLabel('select-one-location')}</option>
-                                    {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
-                                </Dropdown>
-                            </Col>
-                        </Row>
+            <div id="reserve-component-container">
+                <div id="reserve-component-search-params">
+                    <p className="scree-title">{this.internationalization.getLabel('reserve-scree-title')}</p>
+                    <p className="scree-section-description">{this.internationalization.getLabel('reserve-scree-description')}</p>
+                    
+                    <Row>
+                        <Col size="S">
+                            <Label>{this.internationalization.getLabel('location')}</Label>
+                        </Col>
+                        <Col size="M">
+                            <Dropdown onChange={this.onLocationChange}>
+                                <option>{this.internationalization.getLabel('select-one-location')}</option>
+                                {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
+                            </Dropdown>
+                        </Col>
+                    </Row>
 
-                        <Row>
-                            <Col size="S">
-                                <Label>{this.internationalization.getLabel('resource')}</Label>
-                            </Col>
-                            <Col size="M">
-                                <Dropdown>
-                                    {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
-                                </Dropdown>
-                            </Col>
-                        </Row>
+                    <Row>
+                        <Col size="S">
+                            <Label>{this.internationalization.getLabel('resource')}</Label>
+                        </Col>
+                        <Col size="M">
+                            <Dropdown>
+                                {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
+                            </Dropdown>
+                        </Col>
+                    </Row>
 
-                        <Row>
-                            <Col size="S">
-                                <Label>{this.internationalization.getLabel('duration')}</Label>
-                            </Col>
-                            <Col size="M">
-                                <Dropdown>
-                                    {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
-                                </Dropdown>
-                            </Col>
-                        </Row>
+                    <Row>
+                        <Col size="S">
+                            <Label>{this.internationalization.getLabel('duration')}</Label>
+                        </Col>
+                        <Col size="M">
+                            <Dropdown>
+                                {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
+                            </Dropdown>
+                        </Col>
+                    </Row>
 
-                        <Row>
-                            <Col size="S">
-                                <Label>{this.internationalization.getLabel('date')}</Label>
-                            </Col>
-                            <Col size="M"><DatePicker selectCurrenDate={true}/></Col>
-                        </Row>
+                    <Row>
+                        <Col size="S">
+                            <Label>{this.internationalization.getLabel('date')}</Label>
+                        </Col>
+                        <Col size="M"><DatePicker selectCurrenDate={true}/></Col>
+                    </Row>
 
 
-                        <Row>
-                            <Col size="L" style={{textAlign: "center"}}>
-                                <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
-                            </Col>
-                        </Row>
-                    </Col>
+                    <Row>
+                        <Col size="L" style={{textAlign: "center"}}>
+                            <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
+                        </Col>
+                    </Row>
                 </div>
                 <Row>
                     <Scheduler />
                 </Row>
+                <div id="reserve-component-bottom-margin"></div>
             </div>
         );
     }
