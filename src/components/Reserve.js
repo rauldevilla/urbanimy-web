@@ -121,8 +121,9 @@ class Reserve extends Component {
                     </Row>
                 </div>
                 <div id="reserve-component-scheduler-container">
-                    {this.state.showScheduler ? <div><Scheduler /><div id="reserve-component-bottom-margin"></div></div> : <div id="reserve-component-bottom-margin"></div>}
+                    {this.state.showScheduler ? <Scheduler />: null}
                 </div>
+                <div id="reserve-component-bottom-margin"></div>
             </div>
         );
     }
