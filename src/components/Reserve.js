@@ -26,7 +26,8 @@ class Reserve extends Component {
         this.state = {
             userAvailableLocations: [],
             userAvailableResources: [],
-            resourceReserveAvailableDuration: []
+            resourceReserveAvailableDuration: [],
+            showScheduler: false
         };
     }
 
@@ -54,6 +55,10 @@ class Reserve extends Component {
 
     onLocationChange = (e) => {
         this.loadAvailableResources(e.target.value);
+    }
+
+    onSearchAvailabilityClick = (event) => {
+        this.setState({showScheduler: true});
     }
 
     componentDidMount = () => {
@@ -111,14 +116,13 @@ class Reserve extends Component {
 
                     <Row>
                         <Col size="L" style={{textAlign: "center"}}>
-                            <Button style={{margin: "15px"}}>{this.internationalization.getLabel('search-availability')}</Button>
+                            <Button style={{margin: "15px"}} onClick={this.onSearchAvailabilityClick}>{this.internationalization.getLabel('search-availability')}</Button>
                         </Col>
                     </Row>
                 </div>
-                <Row>
-                    <Scheduler />
-                </Row>
-                <div id="reserve-component-bottom-margin"></div>
+                <div id="reserve-component-scheduler-container">
+                    {this.state.showScheduler ? <div><Scheduler /><div id="reserve-component-bottom-margin"></div></div> : <div id="reserve-component-bottom-margin"></div>}
+                </div>
             </div>
         );
     }

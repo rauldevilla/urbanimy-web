@@ -10,8 +10,11 @@
     height: 450px;
 }
 
-#reserve-component-bottom-margin {
-    width: 100%;
-    height: 70px;
+#reserve-component-scheduler-container {
+    display: flex;
+    flex-direction: column;
 }
 
+#reserve-component-bottom-margin {
+    height: 70px;
+}
