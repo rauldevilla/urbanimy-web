@@ -1,6 +1,7 @@
 #reserve-component-container {
     margin: 15px 15px 10px 25px;
     padding: 0px;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -11,8 +12,7 @@
 }
 
 #reserve-component-scheduler-container {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
 }
 
 #reserve-component-bottom-margin {

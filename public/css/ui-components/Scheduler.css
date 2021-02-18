@@ -1,7 +1,7 @@
 #scheduler-component-container {
     width: 99%;
-    height: 50px;
     margin: 0px 0px 15px 0px;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -20,14 +20,27 @@
     font-size: 12px;
     text-align: right;
     float: left;
+    border-radius: 5px;
 }
 
-#scheduler-component-time-zone-right-unavailable {
+.scheduler-component-time-zone-right-unavailable {
     width: 90%;
     height: 100%;
-    background-color: lightgrey;
+    background-color: #a78181;
     font-size: 12px;
     text-align: right;
-    margin: 0px 0px 0px 1px;
+    margin: 0px 0px 0px 3px;
     float: left;
+    border-radius: 5px;
+}
+
+.scheduler-component-time-zone-right-free {
+    width: 90%;
+    height: 100%;
+    background-color: #73f4dc;
+    font-size: 12px;
+    text-align: right;
+    margin: 0px 0px 0px 3px;
+    float: left;
+    border-radius: 5px;
 }
