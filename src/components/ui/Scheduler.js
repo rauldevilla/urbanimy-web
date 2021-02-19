@@ -3,14 +3,34 @@ import React, { Component } from 'react';
 const TIME_ZONES = [
 
     {
+        label: "1 a.m.",
+        value: 1,
+        status: "unavailable"
+    },
+    {
+        label: "2 a.m.",
+        value: 2,
+        status: "unavailable"
+    },
+    {
+        label: "3 a.m.",
+        value: 3,
+        status: "unavailable"
+    },
+    {
+        label: "4 a.m.",
+        value: 4,
+        status: "unavailable"
+    },
+    {
         label: "5 a.m.",
         value: 5,
-        status: "unavailable"
+        status: "reserved"
     },
     {
         label: "6 a.m.",
         value: 6,
-        status: "unavailable"
+        status: "reserved"
     },
     {
         label: "7 a.m.",
@@ -55,22 +75,22 @@ const TIME_ZONES = [
     {
         label: "3 p.m.",
         value: 15,
-        status: "unavailable"
+        status: "reserved"
     },
     {
         label: "4 p.m.",
         value: 16,
-        status: "unavailable"
+        status: "reserved"
     },
     {
         label: "5 p.m.",
         value: 17,
-        status: "unavailable"
+        status: "reserved"
     },
     {
         label: "6 p.m.",
         value: 18,
-        status: "unavailable"
+        status: "reserved"
     },
     {
         label: "7 p.m.",
@@ -101,10 +121,12 @@ class Scheduler extends Component {
 class TimeZone extends Component {
 
     getClassNameFromStatus = () => {
-        if ("unavailable" === this.props.timeZone.status) {
-            return "scheduler-component-time-zone-right-unavailable"
+        if ("reserved" === this.props.timeZone.status) {
+            return "scheduler-component-time-zone-right-reserved"
         } if ("free" === this.props.timeZone.status) {
             return "scheduler-component-time-zone-right-free"
+        } if ("unavailable" === this.props.timeZone.status) {
+            return "scheduler-component-time-zone-right-unavailable"
         }
         return "";
     }
