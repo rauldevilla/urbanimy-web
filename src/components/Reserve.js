@@ -116,7 +116,7 @@ class Reserve extends Component {
 
                     <Row>
                         <Col size="L" style={{textAlign: "center"}}>
-                            <Button style={{margin: "15px"}} onClick={this.onSearchAvailabilityClick}>{this.internationalization.getLabel('search-availability')}</Button>
+                            <Button style={{margin: "15px"}} onClick={this.onSearchAvailabilityClick} type="submit">{this.internationalization.getLabel('search-availability')}</Button>
                         </Col>
                     </Row>
                 </div>

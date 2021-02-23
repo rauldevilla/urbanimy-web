@@ -28,7 +28,7 @@
 .scheduler-component-time-zone-right-unavailable {
     width: 90%;
     height: 45px;
-    background-color: #b8b8b8;
+    background-color: #e4e4e4;
     font-size: 12px;
     text-align: right;
     margin: 0px 0px 6px 3px;
@@ -56,3 +56,27 @@
     border-radius: 5px;
     margin: 0px 0px 6px 3px;
 }
+
+#small-time-label {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #scheduler-component-time-zone-left {
+        display: none;
+    }
+    .scheduler-component-time-zone-right-unavailable {
+        width: 100%;
+    }
+    .scheduler-component-time-zone-right-reserved {
+        width: 100%;
+    }
+    .scheduler-component-time-zone-right-free {
+        width: 100%;
+    }
+    #small-time-label {
+        display: block;
+        float: left;
+        margin: 5px 0px 0px 6px;
+    }
+} 

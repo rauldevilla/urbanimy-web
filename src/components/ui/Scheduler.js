@@ -98,8 +98,13 @@ const TIME_ZONES = [
         status: "free"
     },
     {
-        label: "9 a.m.",
+        label: "8 p.m.",
         value: 20,
+        status: "free"
+    },
+    {
+        label: "9 p.m.",
+        value: 21,
         status: "free"
     },
 
@@ -131,13 +136,19 @@ class TimeZone extends Component {
         return "";
     }
 
+    onDoubleClickHandler = (event) => {
+        console.log("Double click !!");
+    }
+
     render() {
         return (
             <div id="scheduler-component-time-zone">
                 <div id="scheduler-component-time-zone-left">
                     {this.props.timeZone.label}
                 </div>
-                <div className={this.getClassNameFromStatus()}></div>
+                <div className={this.getClassNameFromStatus()} onDoubleClick={this.onDoubleClickHandler}>
+                    <div id="small-time-label">{this.props.timeZone.label}</div>
+                </div>
             </div>
         );
     }
