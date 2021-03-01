@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import useLongPress from '../events/useLongPress';
 
 const TIME_ZONES = [
 
@@ -121,37 +122,84 @@ class Scheduler extends Component {
         );
     }
 
-}
+};
 
-class TimeZone extends Component {
+function TimeZone(props) {
+    var timeZoneStatus = props.timeZone.status;
 
-    getClassNameFromStatus = () => {
-        if ("reserved" === this.props.timeZone.status) {
-            return "scheduler-component-time-zone-right-reserved"
-        } if ("free" === this.props.timeZone.status) {
-            return "scheduler-component-time-zone-right-free"
-        } if ("unavailable" === this.props.timeZone.status) {
-            return "scheduler-component-time-zone-right-unavailable"
+    const TIME_ZONE_STATUS = {
+        RESERVED: {
+            text: "reserved",
+            className: "scheduler-component-time-zone-right-reserved"
+        },
+        FREE: {
+            text: "free",
+            className: "scheduler-component-time-zone-right-free"
+        },
+        UNAVAILABLE: {
+            text: "unavailable",
+            className: "scheduler-component-time-zone-right-unavailable"
+        }
+    };
+
+    const defaultOptions = {
+        shouldPreventDefault: true,
+        delay: 500,
+    };
+
+    const startReserve = () => {
+        if (TIME_ZONE_STATUS.FREE.text === timeZoneStatus) {
+            console.log('Start reserve');
+        }
+    }
+
+    const onLongPress = () => {
+        startReserve();
+    };
+
+    const onDoubleClickHandler = (event) => {
+        startReserve();
+    };
+
+    const onLongClick = () => {
+        //console.log('Long click');
+    };
+
+    const getClassNameFromStatus = () => {
+        if (TIME_ZONE_STATUS.RESERVED.text === timeZoneStatus) {
+            return TIME_ZONE_STATUS.RESERVED.className;
+        } if (TIME_ZONE_STATUS.FREE.text === timeZoneStatus) {
+            return TIME_ZONE_STATUS.FREE.className;
+        } if (TIME_ZONE_STATUS.UNAVAILABLE.text === timeZoneStatus) {
+            return TIME_ZONE_STATUS.UNAVAILABLE.className;
         }
         return "";
-    }
+    };
 
-    onDoubleClickHandler = (event) => {
-        console.log("Double click !!");
-    }
+    const longPressEvent = useLongPress(onLongPress, onLongClick, defaultOptions);
 
-    render() {
+    const getRightComponent = () => {
         return (
-            <div id="scheduler-component-time-zone">
-                <div id="scheduler-component-time-zone-left">
-                    {this.props.timeZone.label}
-                </div>
-                <div className={this.getClassNameFromStatus()} onDoubleClick={this.onDoubleClickHandler}>
-                    <div id="small-time-label">{this.props.timeZone.label}</div>
-                </div>
+            <div className={getClassNameFromStatus()} onDoubleClick={onDoubleClickHandler} {...longPressEvent} >
+                <div id="small-time-label">{props.timeZone.label}</div>
+            </div>
+        )
+    };
+
+    const getLeftComponent = () => {
+        return (
+            <div id="scheduler-component-time-zone-left">
+                {props.timeZone.label}
             </div>
         );
-    }
+    };
+
+    return (
+        <div id="scheduler-component-time-zone">
+            {getLeftComponent()}
+            {getRightComponent()}
+        </div>
+    )
 
 }
 
