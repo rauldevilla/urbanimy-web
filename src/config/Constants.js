@@ -17,6 +17,8 @@ export const Configuration = {
             "duration": "Duración",
             "reserve-scree-description": "Selecciona la ubicación que deseas reservar y la fecha en que la necesitas",
             "search-availability": "Ver disponibilidad",
+            "reserve-confirm-title": "Confirmación de reserva",
+            "reserve-confirm-message": "¿Deseas reservar _$resource_name$_ a las _$reserve_time$_?",
             "months": [
                 {id: 1, name: "Enero"},
                 {id: 2, name: "Febrero"},

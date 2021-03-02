@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { Confirm } from 'react-st-modal';
+
+import Internationalization from '../../config/Internationalizacion';
+
 import useLongPress from '../events/useLongPress';
 
 import { getScheduleForDate } from '../../services/UserLocationServices';
+
+const internationalization = new Internationalization();
 
 const TIME_ZONE_STATUS = {
     OCCUPIED: {
@@ -52,7 +58,6 @@ class Scheduler extends Component {
         var scheduleDate = new Date();
         getScheduleForDate(scheduleDate, 
                 (scheduleData) => {
-                    console.log("schedule", scheduleData);
                     var baseSchedule = this.getBaseSchedule();
                     scheduleData.schedule.forEach(timeZoneData => {
                         var base = baseSchedule.find(element => element.value === timeZoneData.hour);
@@ -76,7 +81,7 @@ class Scheduler extends Component {
     render() {
         return (
             <div id="scheduler-component-container" style={{displa: this.props.hide ? "none" : ""}} {...this.props}>
-                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} key={index}/>)}
+                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} resource={{name: "AAABBBCCC"}} key={index}/>)}
             </div>
         );
     }
@@ -91,18 +96,26 @@ function TimeZone(props) {
         delay: 500,
     };
 
-    const startReserve = () => {
+    const confirmReserve = async () => {
         if (TIME_ZONE_STATUS.FREE.text === timeZoneStatus) {
-            console.log('Start reserve');
+            const result = await Confirm(
+                internationalization.getLabelTagged('reserve-confirm-message', 
+                [
+                    {tag: "resource_name", value: props.resource.name},
+                    {tag: "reserve_time", value: props.timeZone.label},
+                ]),
+                internationalization.getLabel('reserve-confirm-title')
+            );
+            console.log('result', result);
         }
     }
 
     const onLongPress = () => {
-        startReserve();
+        confirmReserve();
     };
 
     const onDoubleClickHandler = (event) => {
-        startReserve();
+        confirmReserve();
     };
 
     const onLongClick = () => {
