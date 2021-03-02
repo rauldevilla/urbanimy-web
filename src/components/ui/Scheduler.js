@@ -1,123 +1,82 @@
 import React, { Component } from 'react';
 import useLongPress from '../events/useLongPress';
 
-const TIME_ZONES = [
+import { getScheduleForDate } from '../../services/UserLocationServices';
 
-    {
-        label: "1 a.m.",
-        value: 1,
-        status: "unavailable"
+const TIME_ZONE_STATUS = {
+    OCCUPIED: {
+        text: "occupied",
+        className: "scheduler-component-time-zone-right-occupied"
     },
-    {
-        label: "2 a.m.",
-        value: 2,
-        status: "unavailable"
+    FREE: {
+        text: "free",
+        className: "scheduler-component-time-zone-right-free"
     },
-    {
-        label: "3 a.m.",
-        value: 3,
-        status: "unavailable"
-    },
-    {
-        label: "4 a.m.",
-        value: 4,
-        status: "unavailable"
-    },
-    {
-        label: "5 a.m.",
-        value: 5,
-        status: "reserved"
-    },
-    {
-        label: "6 a.m.",
-        value: 6,
-        status: "reserved"
-    },
-    {
-        label: "7 a.m.",
-        value: 7,
-        status: "free"
-    },
-    {
-        label: "8 a.m.",
-        value: 8,
-        status: "free"
-    },
-    {
-        label: "9 a.m.",
-        value: 9,
-        status: "free"
-    },
-    {
-        label: "10 a.m.",
-        value: 10,
-        status: "free"
-    },
-    {
-        label: "11 a.m.",
-        value: 11,
-        status: "free"
-    },
-    {
-        label: "12 m.",
-        value: 12,
-        status: "free"
-    },
-    {
-        label: "1 p.m.",
-        value: 13,
-        status: "free"
-    },
-    {
-        label: "2 p.m.",
-        value: 14,
-        status: "free"
-    },
-    {
-        label: "3 p.m.",
-        value: 15,
-        status: "reserved"
-    },
-    {
-        label: "4 p.m.",
-        value: 16,
-        status: "reserved"
-    },
-    {
-        label: "5 p.m.",
-        value: 17,
-        status: "reserved"
-    },
-    {
-        label: "6 p.m.",
-        value: 18,
-        status: "reserved"
-    },
-    {
-        label: "7 p.m.",
-        value: 19,
-        status: "free"
-    },
-    {
-        label: "8 p.m.",
-        value: 20,
-        status: "free"
-    },
-    {
-        label: "9 p.m.",
-        value: 21,
-        status: "free"
-    },
-
-];
-
+    UNAVAILABLE: {
+        text: "unavailable",
+        className: "scheduler-component-time-zone-right-unavailable"
+    }
+};
 
 class Scheduler extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            timeZones: []
+        };
+    }
+
+    getLabelForHour = (hour) => {
+        return (
+            hour < 12 ? hour + " a.m." : 
+                hour === 12 ? hour + " m." : 
+                    (hour - 12) + " p.m."
+        );
+    }
+
+    getBaseSchedule = () => {
+        var timeZones = [];
+        for (var hour = 0; hour < 24; hour++) {
+            timeZones.push({
+                label: this.getLabelForHour(hour),
+                value: hour,
+                status: TIME_ZONE_STATUS.UNAVAILABLE.text
+            });
+        }
+        return timeZones;
+    }
+
+
+    loadScheduleForDate = () => {
+        var scheduleDate = new Date();
+        getScheduleForDate(scheduleDate, 
+                (scheduleData) => {
+                    console.log("schedule", scheduleData);
+                    var baseSchedule = this.getBaseSchedule();
+                    scheduleData.schedule.forEach(timeZoneData => {
+                        var base = baseSchedule.find(element => element.value === timeZoneData.hour);
+                        if (base != null && base !== "undefined") {
+                            base.status = timeZoneData.status;
+                        }
+                    });
+                    this.setState({timeZones: baseSchedule});
+                },
+                (error) => {
+                    console.error(error);
+                }
+            )
+
+    }
+
+    componentDidMount = () => { 
+        this.loadScheduleForDate();
+    }
 
     render() {
         return (
             <div id="scheduler-component-container" style={{displa: this.props.hide ? "none" : ""}} {...this.props}>
-                {TIME_ZONES.map((timeZone, index) => <TimeZone timeZone={timeZone} key={index}/>)}
+                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} key={index}/>)}
             </div>
         );
     }
@@ -126,21 +85,6 @@ class Scheduler extends Component {
 
 function TimeZone(props) {
     var timeZoneStatus = props.timeZone.status;
-
-    const TIME_ZONE_STATUS = {
-        RESERVED: {
-            text: "reserved",
-            className: "scheduler-component-time-zone-right-reserved"
-        },
-        FREE: {
-            text: "free",
-            className: "scheduler-component-time-zone-right-free"
-        },
-        UNAVAILABLE: {
-            text: "unavailable",
-            className: "scheduler-component-time-zone-right-unavailable"
-        }
-    };
 
     const defaultOptions = {
         shouldPreventDefault: true,
@@ -166,8 +110,8 @@ function TimeZone(props) {
     };
 
     const getClassNameFromStatus = () => {
-        if (TIME_ZONE_STATUS.RESERVED.text === timeZoneStatus) {
-            return TIME_ZONE_STATUS.RESERVED.className;
+        if (TIME_ZONE_STATUS.OCCUPIED.text === timeZoneStatus) {
+            return TIME_ZONE_STATUS.OCCUPIED.className;
         } if (TIME_ZONE_STATUS.FREE.text === timeZoneStatus) {
             return TIME_ZONE_STATUS.FREE.className;
         } if (TIME_ZONE_STATUS.UNAVAILABLE.text === timeZoneStatus) {
