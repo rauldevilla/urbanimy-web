@@ -81,7 +81,7 @@ class Scheduler extends Component {
     render() {
         return (
             <div id="scheduler-component-container" style={{displa: this.props.hide ? "none" : ""}} {...this.props}>
-                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} resource={{name: "AAABBBCCC"}} key={index}/>)}
+                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} resource={{name: this.props.resource.name}} onAcceptReserve={this.props.onAcceptReserve} key={index}/>)}
             </div>
         );
     }
@@ -106,7 +106,10 @@ function TimeZone(props) {
                 ]),
                 internationalization.getLabel('reserve-confirm-title')
             );
-            console.log('result', result);
+            if (result) {
+                var reserve = {resource: props.resource, timeZone: props.timeZone};
+                props.onAcceptReserve(reserve);
+            }
         }
     }
 

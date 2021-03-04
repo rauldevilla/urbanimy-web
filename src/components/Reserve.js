@@ -61,6 +61,10 @@ class Reserve extends Component {
         this.setState({showScheduler: true});
     }
 
+    onAcceptReserveHandler = (reserve) => {
+        console.log('reserve', reserve);
+    }
+
     componentDidMount = () => {
         this.loadUserAvailableLocations();
     }
@@ -121,7 +125,7 @@ class Reserve extends Component {
                     </Row>
                 </div>
                 <div id="reserve-component-scheduler-container">
-                    {this.state.showScheduler ? <Scheduler />: null}
+                    {this.state.showScheduler ? <Scheduler resource={{name: "This is my resource"}} onAcceptReserve={this.onAcceptReserveHandler}/>: null}
                 </div>
                 <div id="reserve-component-bottom-margin"></div>
             </div>
