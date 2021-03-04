@@ -12,6 +12,8 @@ export const Configuration = {
             "menu-settings": "Configuración",
             "location": "Ubicación",
             "select-one-location": "Seleccione una ubicación",
+            "select-one-resource-type": "Seleccione un tipo de recurso",
+            "resource-type": "Tipo de recurso",
             "resource": "Recurso",
             "reserve-scree-title": "Reservar",
             "duration": "Duración",

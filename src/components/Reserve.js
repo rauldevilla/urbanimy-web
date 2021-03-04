@@ -13,7 +13,8 @@ import { UserSessionContext } from '../context/UserContext.js';
 import Internationalization from '../config/Internationalizacion';
 
 import { getUserLocations } from '../services/UserLocationServices';
-import { getUserResourcesInLocation } from '../services/UserLocationServices';
+import { getUserResourceTypesInLocation } from '../services/UserLocationServices';
+import { getUserResourceTypesByTypeId } from '../services/UserLocationServices';
 
 class Reserve extends Component {
 
@@ -25,7 +26,7 @@ class Reserve extends Component {
         super(props);
         this.state = {
             userAvailableLocations: [],
-            userAvailableResources: [],
+            userAvailableResourcesTypes: [],
             resourceReserveAvailableDuration: [],
             showScheduler: false
         };
@@ -42,10 +43,26 @@ class Reserve extends Component {
         );
     }
 
-    loadAvailableResources = (resourceId) => {
-        getUserResourcesInLocation(resourceId,
+    loadAvailableResourcesTypes = (resourceId) => {
+        getUserResourceTypesInLocation(resourceId,
+            (resourceTypessArray) => {
+                if (resourceTypessArray != null && resourceTypessArray !== "undefined" && resourceTypessArray.length > 0) {
+                    this.setState({userAvailableResourcesTypes: resourceTypessArray});
+                } else {
+                    this.setState({userAvailableResourcesTypes: []});
+                }
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
+    }
+
+    loadAvailableResources = (resourceTypeId) => {
+        getUserResourceTypesByTypeId(
+            resourceTypeId,
             (resourcesArray) => {
-                this.setState({userAvailableResources: resourcesArray});
+                console.log('resourcesArray', resourcesArray);
             },
             (error) => {
                 console.error(error);
@@ -54,7 +71,13 @@ class Reserve extends Component {
     }
 
     onLocationChange = (e) => {
-        this.loadAvailableResources(e.target.value);
+        this.loadAvailableResourcesTypes(e.target.value);
+    }
+
+    onResourceTypeChange = (e) => {
+        if (e.target.value !== "" ) {
+            this.loadAvailableResources(e.target.value);
+        }
     }
 
     onSearchAvailabilityClick = (event) => {
@@ -82,7 +105,7 @@ class Reserve extends Component {
                         </Col>
                         <Col size="M">
                             <Dropdown onChange={this.onLocationChange}>
-                                <option>{this.internationalization.getLabel('select-one-location')}</option>
+                                <option value="">{this.internationalization.getLabel('select-one-location')}</option>
                                 {this.state.userAvailableLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option>)}
                             </Dropdown>
                         </Col>
@@ -90,25 +113,16 @@ class Reserve extends Component {
 
                     <Row>
                         <Col size="S">
-                            <Label>{this.internationalization.getLabel('resource')}</Label>
+                            <Label>{this.internationalization.getLabel('resource-type')}</Label>
                         </Col>
                         <Col size="M">
-                            <Dropdown>
-                                {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
+                            <Dropdown onChange={this.onResourceTypeChange}>
+                                {this.state.userAvailableResourcesTypes.length > 0 ? <option value="">{this.internationalization.getLabel('select-one-resource-type')}</option> : null}
+                                {this.state.userAvailableResourcesTypes.map((resourceType) => <option value={resourceType.id} key={resourceType.id}>{resourceType.name}</option>)}
                             </Dropdown>
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col size="S">
-                            <Label>{this.internationalization.getLabel('duration')}</Label>
-                        </Col>
-                        <Col size="M">
-                            <Dropdown>
-                                {this.state.userAvailableResources.map((resource) => <option value={resource.id} key={resource.id}>{resource.name}</option>)}
-                            </Dropdown>
-                        </Col>
-                    </Row>
 
                     <Row>
                         <Col size="S">

@@ -13,18 +13,50 @@ const USER_LOCATIONS = [
 const USER_RESOURCES_BY_LOCATION = [
     {
         id: "BG001",
+        resourceTypes: [
+            {
+                id: "RT001",
+                name: "Cancha múltiple",
+            },
+            {
+                id: "RT002",
+                name: "Banda trotadora",
+            },
+            {
+                id: "RT003",
+                name: "Bicicleta spinnig",
+            }
+        ],
         resources: [
             {
-                id: "COURT001",
-                name: "Cancha múltiple"
+                id: "RES001",
+                resourceTypeId: "RT001",
+                name: "Cancha principal"
             },
             {
-                id: "GYM001",
-                name: "Gimnasio 1"
+                id: "RES002",
+                resourceTypeId: "RT002",
+                name: "Banda Gimnasio 1"
             },
             {
-                id: "GYM002",
-                name: "Gimnasio 2"
+                id: "RES003",
+                resourceTypeId: "RT002",
+                name: "Banda Gimnasio 2"
+            },
+            {
+                id: "RES004",
+                resourceTypeId: "RT002",
+                name: "Banda Salón social 1"
+            },
+            {
+                id: "RES005",
+                resourceTypeId: "RT003",
+                name: "Bicicleta Gymnasio 1"
+            },
+            {
+                id: "RES006",
+                resourceTypeId: "RT003",
+                name: "Bicicleta salón socila 1"
             }
         ]
     }
@@ -35,10 +67,15 @@ export const getUserLocations = (user, onSuccess, onError) => {
     onSuccess(USER_LOCATIONS);
 };
 
-export const getUserResourcesInLocation = (locationId, onSuccess, onError) => {
-    var resources = USER_RESOURCES_BY_LOCATION.filter((location) => location.id === locationId);
-    onSuccess(resources != null && resources !== 'undefined' && resources.length > 0 ? resources[0].resources : []);
+export const getUserResourceTypesInLocation = (locationId, onSuccess, onError) => {
+    var resourceTypes = USER_RESOURCES_BY_LOCATION.filter((location) => location.id === locationId);
+    onSuccess(resourceTypes != null && resourceTypes !== 'undefined' && resourceTypes.length > 0 ? resourceTypes[0].resourceTypes : []);
 };
+
+export const getUserResourceTypesByTypeId = (resourceTypeId, onSuccess, onError) => {
+    var resources = USER_RESOURCES_BY_LOCATION[0].resources.filter((resource) => resource.resourceTypeId === resourceTypeId);
+    onSuccess(resources != null && resources !== 'undefined' && resources.length > 0 ? resources : []);
+}
 
 export const getScheduleForDate = (date, onSuccess, onError) => {
 

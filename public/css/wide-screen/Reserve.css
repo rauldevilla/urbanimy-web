@@ -8,11 +8,12 @@
 
 #reserve-component-search-params {
     width: 100%;
-    height: 450px;
+    height: auto;
 }
 
 #reserve-component-scheduler-container {
     width: 100%;
+    padding-top: 20px;
 }
 
 #reserve-component-bottom-margin {
