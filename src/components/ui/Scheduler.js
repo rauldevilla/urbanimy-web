@@ -89,8 +89,8 @@ class Scheduler extends Component {
 
         return (
             <Swiper style={{width: "100%", height: "150px"}}>
-                <div className="scheduler-component-swiper-panel" style={{background: "green"}}/>
-                <div className="scheduler-component-swiper-panel" style={{background: "blue"}}/>
+                <div title="First title" className="scheduler-component-swiper-panel" style={{background: "green"}}/>
+                <div title="Second title" className="scheduler-component-swiper-panel" style={{background: "blue"}}/>
             </Swiper>
         );
 

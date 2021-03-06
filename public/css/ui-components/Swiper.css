@@ -2,8 +2,66 @@
     padding: 0px;
     margin: 0px;
     width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#swiper-component-header {
+    height: 50px;
+    width: 100%;
+    background: #f7e2e2;
+}
+
+#swiper-component-header #left {
+    height: 100%;
+    width: 5%;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#swiper-component-header #middle {
+    height: 100%;
+    width: 90%;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#swiper-component-header #right {
+    height: 100%;
+    width: 5%;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+#swiper-component-body {
     height: 100%;
     overflow: hidden;
     display: inline-block;
 }
 
+@media only screen and (max-width: 600px) {
+    #swiper-component-header #left {
+        width: 10%;
+    }
+    
+    #swiper-component-header #middle {
+        width: 80%;
+    }
+    
+    #swiper-component-header #right {
+        width: 10%;
+    }
+}
