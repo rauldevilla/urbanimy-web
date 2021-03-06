@@ -27,7 +27,7 @@ class Reserve extends Component {
         this.state = {
             userAvailableLocations: [],
             userAvailableResourcesTypes: [],
-            resourceReserveAvailableDuration: [],
+            resourcesArray: [],
             showScheduler: false
         };
     }
@@ -63,6 +63,7 @@ class Reserve extends Component {
             resourceTypeId,
             (resourcesArray) => {
                 console.log('resourcesArray', resourcesArray);
+                this.setState({resourcesArray: resourcesArray});
             },
             (error) => {
                 console.error(error);
@@ -139,7 +140,7 @@ class Reserve extends Component {
                     </Row>
                 </div>
                 <div id="reserve-component-scheduler-container">
-                    {this.state.showScheduler ? <Scheduler resource={{name: "This is my resource"}} onAcceptReserve={this.onAcceptReserveHandler}/>: null}
+                    {this.state.showScheduler ? <Scheduler resources={this.state.resourcesArray} onAcceptReserve={this.onAcceptReserveHandler}/>: null}
                 </div>
                 <div id="reserve-component-bottom-margin"></div>
             </div>

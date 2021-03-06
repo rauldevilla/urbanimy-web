@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body onTouchMove="swipe(event)">
+
+    <div id="p1"></div>
+    <div id="p2"></div>
+
+    <script>
+        function swipe(event) {
+            var p1 = document.getElementById("p1");
+            var p2 = document.getElementById("p2");
+            
+            var touch = event.targetTouches[0];
+            px = touch.pageX;
+            //console.log('px', px);
+            
+            var midPoint = Math.floor(screen.width / 2);
+
+            if (px > midPoint) {
+                p1.style.marginLeft = '-100%';
+                p1.style.transition = '1s';
+            } /*else {
+                p1.style.marginLeft = '0px';
+                p1.style.transition = '1s';
+            }*/
+        } 
+    </script>
+
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        #p1, #p2 {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #p1 {
+            background: #159;
+            color: #fff;
+        }
+
+        #p2 {
+            background: #fff;
+            color: #159;
+        }
+
+    </style>
+
+    </body>
+</html>

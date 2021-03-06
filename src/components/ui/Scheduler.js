@@ -7,6 +7,8 @@ import useLongPress from '../events/useLongPress';
 
 import { getScheduleForDate } from '../../services/UserLocationServices';
 
+import Swiper from './Swiper';
+
 const internationalization = new Internationalization();
 
 const TIME_ZONE_STATUS = {
@@ -79,11 +81,19 @@ class Scheduler extends Component {
     }
 
     render() {
+//        return (
+//            <div id="scheduler-component-container" style={{displa: this.props.hide ? "none" : ""}} {...this.props}>
+//                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} resource={{name: this.props.resource.name}} onAcceptReserve={this.props.onAcceptReserve} key={index}/>)}
+//            </div>
+//        );
+
         return (
-            <div id="scheduler-component-container" style={{displa: this.props.hide ? "none" : ""}} {...this.props}>
-                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} resource={{name: this.props.resource.name}} onAcceptReserve={this.props.onAcceptReserve} key={index}/>)}
-            </div>
+            <Swiper style={{width: "100%", height: "150px"}}>
+                <div className="scheduler-component-swiper-panel" style={{background: "green"}}/>
+                <div className="scheduler-component-swiper-panel" style={{background: "blue"}}/>
+            </Swiper>
         );
+
     }
 
 };
