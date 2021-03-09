@@ -4,10 +4,14 @@ class Swiper extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+
+        var thisState = {
             swipePanelIndex: 0,
-            title: ""
+            title: "",
+            panels: []
         };
+
+        this.state = thisState;
     }
 
     onTouchMoveHandler = (event) => {
@@ -19,35 +23,67 @@ class Swiper extends Component {
 
     leftClickHandle = (event) => {
         if (this.state.swipePanelIndex > 0) {
+            var currIndex = this.state.swipePanelIndex;
+            this.doSwipe(currIndex, currIndex - 1);
         }
     }
 
     rightClickHandle = (event) => {
         if (this.state.swipePanelIndex < this.props.children.length - 1) {
             var currIndex = this.state.swipePanelIndex;
-            var comp = this.props.children[currIndex];
-            
-            console.log('comp.style', comp.props.style);
-
-            comp.props.style.marginLeft = "-100%";
-            comp.props.style.transition = '1s';
-            
-            this.setState({swipePanelIndex: currIndex + 1});
+            this.doSwipe(currIndex, currIndex + 1);
         }
+    }
+
+    doSwipe = (fromIndex, toIndex) => {
+        console.log('doSwipe', 'fromIndex', fromIndex, 'toIndex', toIndex);
+        const swipeRight = fromIndex > toIndex;
+        var panels = [...this.state.panels];
+
+        /*
+        panels[fromIndex] = React.cloneElement(panels[fromIndex], {
+            style: {
+                marginLeft: swipeRight ? "-100%" : "100%", 
+                transition: "1s"
+            }
+        });
+        
+        panels[toIndex] = React.cloneElement(panels[toIndex], {
+            style: {
+                marginLeft: "0", 
+                transition: "1s"
+            }
+        });
+        */
+
+        this.setState({panels: panels, swipePanelIndex: toIndex});
     }
 
     getTitle = (index) => {
         if (this.props.children.length <= 0 || index > (this.props.children.length - 1)) {
             return "";
         }
-        console.log('this.props.children', this.props.children);
         return this.props.children[index].props.title === "undefined" ? "" : this.props.children[index].props.title;
+    }
+
+    createChild = (baseChildren, index) => {
+        const style = {
+            leftMargin: "0%",
+            transition: "1s"
+        };
+
+        return (<div id="swiper-component-new-element" key={index} style={style}>{baseChildren}</div>);
+    }
+
+    createChildren = () => {
+        var children = this.props.children.map((c, index) => this.createChild(c, index));
+        return children;
     }
 
     componentDidMount = () => {
         var title = this.getTitle(0);
-        console.log('title', title);
-        this.setState({title: title});
+        var panels = this.createChildren();
+        this.setState({title: title, panels: panels});
     }
 
     render () {
@@ -59,7 +95,7 @@ class Swiper extends Component {
                     <div id="right" onClick={this.rightClickHandle}><i className="arrow right-arrow"></i></div>
                 </div>
                 <div id="swiper-component-body">
-                    {this.props.children}
+                    {this.state.panels}
                 </div>
             </div>
         );
