@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
-const STYLE_PREFIX = {
-   left: "elementLeft-",
-   display: 'elementDisplay-'
+const ELEMENT_STYLE_PREFIX = "ELEMENT_STYLE_";
+
+const MOVEMENT_POSITION = {
+    left: "LEFT",
+    right: "RIGHT",
+    middle: "MIDDLE"
 };
 
 class Swiper extends Component {
@@ -18,11 +21,19 @@ class Swiper extends Component {
         };
 
         props.children.forEach((e, index) => {
-            thisState[STYLE_PREFIX.left + index] = (index === 0 ? "0" : "100%");
-            thisState[STYLE_PREFIX.display + index] = (index === 0 ? "block" : "none");
+            thisState[ELEMENT_STYLE_PREFIX + index] = (index === 0 ? 
+                this.createElementStyleForPosition(MOVEMENT_POSITION.middle) : this.createElementStyleForPosition(MOVEMENT_POSITION.right));
         });
 
         this.state = thisState;
+    }
+
+    createElementStyleForPosition = (position) => {
+        return ({
+            left: MOVEMENT_POSITION.right === position ? "100%" : 
+                            MOVEMENT_POSITION.left === position ? "-100%" : "0",
+            transition: "1s"
+        });
     }
 
     onTouchMoveHandler = (event) => {
@@ -47,19 +58,15 @@ class Swiper extends Component {
     }
 
     doSwipe = (fromIndex, toIndex) => {
-        console.log('doSwipe', 'fromIndex', fromIndex, 'toIndex', toIndex);
         const swipeRight = fromIndex < toIndex;
 
-        console.log('this.panelStyles', this.panelStyles);
-
-        var marginLeftFrom = swipeRight ? "-100%" : "100%";
+        var fromStyle = this.createElementStyleForPosition(swipeRight ? MOVEMENT_POSITION.left : MOVEMENT_POSITION.right);
+        var toStyle = this.createElementStyleForPosition(MOVEMENT_POSITION.middle);
 
         this.setState({
             swipePanelIndex: toIndex, 
-            [STYLE_PREFIX.left + fromIndex]: marginLeftFrom, 
-            [STYLE_PREFIX.display + fromIndex]: 'none', 
-            [STYLE_PREFIX.left + toIndex]: "0",
-            [STYLE_PREFIX.display + toIndex]: 'block'
+            [ELEMENT_STYLE_PREFIX + fromIndex]: fromStyle,
+            [ELEMENT_STYLE_PREFIX + toIndex]: toStyle,
         });
 
     }
@@ -74,11 +81,7 @@ class Swiper extends Component {
     createChild = (baseChildren, index) => {
         return (<div    id="swiper-component-new-element" 
                         key={index} 
-                        style={{
-                            left: this.state[STYLE_PREFIX.left + index],
-                            //display: this.state[STYLE_PREFIX.display + index],
-                            transition: "1s"
-                        }}>{baseChildren}</div>);
+                        style={this.state[ELEMENT_STYLE_PREFIX + index]}>{baseChildren}</div>);
     }
 
     createChildren = () => {
@@ -102,7 +105,6 @@ class Swiper extends Component {
 
     render () {
         const children = this.createChildren();
-        console.log('children', children);
         return (
             <div id="swiper-component-container" {...this.props} onTouchMove={this.onTouchMoveHandler}>
                 <div id="swiper-component-header">
