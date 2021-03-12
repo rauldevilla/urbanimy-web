@@ -11,7 +11,7 @@
 #swiper-component-header {
     height: 50px;
     width: 100%;
-    background: #f7e2e2;
+    border-top: 1px solid #f1e9eb;
 }
 
 #swiper-component-header #left {
@@ -22,6 +22,7 @@
     vertical-align: middle;
     margin-top: 10px;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 #swiper-component-header #middle {
@@ -43,12 +44,12 @@
     vertical-align: middle;
     margin-top: 10px;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 #swiper-component-body {
     height: 100%;
-    overflow: hidden;
-    display: inline-block;
+    width: 100%;
 }
 
 #swiper-component-new-element {
@@ -56,7 +57,7 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    display: inline-block;
+    position: absolute;
 }
 
 @media only screen and (max-width: 600px) {

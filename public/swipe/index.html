@@ -1,62 +1,81 @@
 <html>
     <head>
-        <meta name="viewport" content="width=device-width">
-    </head>
-    <body onTouchMove="swipe(event)">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div id="p1"></div>
-    <div id="p2"></div>
+        <style>
+            .body {
+                position: fixed;
+            }
+
+            .center {
+                font-size: 300%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .page1 {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vw;
+                background: red;
+            }
+
+            .page2 {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 100%;
+                width: 100vw;
+                height: 100vw;
+                background: yellow;
+            }
+        </style>
+    
+    </head>
+    <body>
+
+    <div    class="page1"
+            id="page1"
+            ontouchstart="p1HandleTouchStart(event)"
+            ontouchmove="p1HandleTouchMove(event)"
+            ontouchstart="p1HandleTouchEnd(event)">
+            <span class="center">Page 1</span>
+    </div>
+    <div    class="page2"
+            id="page2"
+            ontouchstart="p2HandleTouchStart(event)"
+            ontouchmove="p2HandleTouchMove(event)"
+            ontouchstart="p2HandleTouchEnd(event)">
+            <span class="center">Page 1</span>
+    </div>
 
     <script>
-        function swipe(event) {
-            var p1 = document.getElementById("p1");
-            var p2 = document.getElementById("p2");
-            
-            var touch = event.targetTouches[0];
-            px = touch.pageX;
-            //console.log('px', px);
-            
-            var midPoint = Math.floor(screen.width / 2);
 
-            if (px > midPoint) {
-                p1.style.marginLeft = '-100%';
-                p1.style.transition = '1s';
-            } /*else {
-                p1.style.marginLeft = '0px';
-                p1.style.transition = '1s';
-            }*/
-        } 
+        var p1 = document.getElementById("p1");
+        var p2 = document.getElementById("p2");
+
+        var startingX = 0;
+
+        p1HandleTouchStart = (event) => {
+            startingX = event.touches[0].clientX;
+        }
+
+        p2HandleTouchMove = (event) => {
+            var touch = event.touches[0];
+            var change = startingX - touch.clientX;
+            p1.style.left = '-' + change + 'px';
+            p2.style.display = 'block';
+        }
+
+        p2HandleTouchEnd = (event) => {
+            
+        }
+
     </script>
-
-    <style>
-        body {
-            padding: 0px;
-            margin: 0px;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            display: inline-block;
-        }
-
-        #p1, #p2 {
-            width: 100%;
-            height: 100%;
-            display: inline-block;
-            padding: 0px;
-            margin: 0px;
-        }
-
-        #p1 {
-            background: #159;
-            color: #fff;
-        }
-
-        #p2 {
-            background: #fff;
-            color: #159;
-        }
-
-    </style>
 
     </body>
 </html>
