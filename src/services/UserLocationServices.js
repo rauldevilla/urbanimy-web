@@ -77,7 +77,7 @@ export const getUserResourceTypesByTypeId = (resourceTypeId, onSuccess, onError)
     onSuccess(resources != null && resources !== 'undefined' && resources.length > 0 ? resources : []);
 }
 
-export const getScheduleForDate = (date, onSuccess, onError) => {
+export const getResourcesScheduleForDate = (date, onSuccess, onError) => {
 
     onSuccess(
         {

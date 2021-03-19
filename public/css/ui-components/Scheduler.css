@@ -1,7 +1,7 @@
 #scheduler-component-container {
     width: 99%;
     margin: 0px 0px 15px 0px;
-    height: auto;
+    height: 1400px;
     display: flex;
     flex-direction: column;
 }
@@ -80,6 +80,9 @@
         width: 100%;
     }
     .scheduler-component-time-zone-right-free {
+        width: 100%;
+    }
+    .scheduler-component-time-zone-right-occupied {
         width: 100%;
     }
     #small-time-label {

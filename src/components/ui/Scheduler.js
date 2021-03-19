@@ -5,7 +5,7 @@ import Internationalization from '../../config/Internationalizacion';
 
 import useLongPress from '../events/useLongPress';
 
-import { getScheduleForDate } from '../../services/UserLocationServices';
+import { getResourcesScheduleForDate } from '../../services/UserLocationServices';
 
 import Swiper from './Swiper';
 
@@ -58,7 +58,7 @@ class Scheduler extends Component {
 
     loadScheduleForDate = () => {
         var scheduleDate = new Date();
-        getScheduleForDate(scheduleDate, 
+        getResourcesScheduleForDate(scheduleDate, 
                 (scheduleData) => {
                     var baseSchedule = this.getBaseSchedule();
                     scheduleData.schedule.forEach(timeZoneData => {
@@ -87,13 +87,22 @@ class Scheduler extends Component {
                                         onAcceptReserve={this.props.onAcceptReserve} 
                                         key={index}/>
                         );
-        console.log('timeZones', timeZones);
 
         var scheduler = null;
         if (timeZones != null && timeZones !== "undefined" && Array.isArray(timeZones) && timeZones.length > 0) {
-            scheduler = React.createElement('div', {id: "scheduler-component-container", children: timeZones});
+            scheduler = React.createElement('div', 
+                                    {
+                                        id: "scheduler-component-container", 
+                                        title: "DUMMY TIMEZONE", 
+                                        children: timeZones, 
+                                        elementsBaseStyle: 
+                                                    {
+                                                        paddingLeft: "20px",
+                                                        paddingRight: "8px",
+                                                    }
+                                    });
         }
-        console.log('scheduler', scheduler);
+
         return scheduler;
     }
 y
@@ -107,14 +116,6 @@ y
 
 /*
         return (
-            <div id="scheduler-component-container">
-                {this.getTimeZones()}
-            </div>
-        );
-*/
-
-/*
-        return (
             <Swiper style={{width: "100%", height: "auto"}}>
                 <div title="First title" className="scheduler-component-swiper-panel" style={{background: "green"}}/>
                 <div title="Second title" className="scheduler-component-swiper-panel" style={{background: "blue"}}/>
@@ -125,10 +126,11 @@ y
 
         return (
             timeZones != null ? 
-                                <Swiper style={{width: "100%", height: "auto"}}>
+                                <Swiper>
+                                        {timeZones}
                                         {timeZones}
                                 </Swiper> :
-                                <div>No time zones</div>
+                                <div style={{color: "red", size: "Large"}}>No time zones</div>
         );
 
     }

@@ -13,16 +13,13 @@ class Swiper extends Component {
     constructor(props) {
         super(props);
 
-        console.log('constructor.props.children', props.children);
-
         var childrenArray = this.createChildrenArray(props);
-        console.log('childrenArray', childrenArray);
 
         var thisState = {
             swipePanelIndex: 0,
-            panels: [],
             panelStyles: [],
-            children: childrenArray
+            children: childrenArray,
+            elementBaseStyle: props.elementBaseStyle
         };
 
         childrenArray.forEach((e, index) => {
@@ -43,7 +40,8 @@ class Swiper extends Component {
         return props.children;
     }
 
-    createElementStyleForPosition = (position) => {
+    createElementStyleForPosition = (position, baseStyle) => {
+        console.log('baseStyle', baseStyle);
         return ({
             left: MOVEMENT_POSITION.right === position ? "100%" : 
                             MOVEMENT_POSITION.left === position ? "-100%" : "0",
@@ -81,7 +79,7 @@ class Swiper extends Component {
         const swipeRight = fromIndex < toIndex;
 
         var fromStyle = this.createElementStyleForPosition(swipeRight ? MOVEMENT_POSITION.left : MOVEMENT_POSITION.right);
-        var toStyle = this.createElementStyleForPosition(MOVEMENT_POSITION.middle);
+        var toStyle = this.createElementStyleForPosition(MOVEMENT_POSITION.middle, this.state.elementBaseStyle);
 
         var title = this.getChildTitle(toIndex);
 
@@ -102,15 +100,35 @@ class Swiper extends Component {
         return this.state.children[index].props.title === "undefined" ? "" : this.state.children[index].props.title;
     }
 
-    createChild = (baseChildren, index) => {
-        console.log('baseChildren.' + index, baseChildren);
-        return (<div    id="swiper-component-new-element" 
-                        key={index} 
-                        style={this.state[ELEMENT_STYLE_PREFIX + index]}>{baseChildren}</div>);
+    getCurrentTitle = () => {
+        return this.getTitle(this.state.swipePanelIndex);
     }
 
-    createChildren = (childrenBase) => {
-        console.log('childrenBase', childrenBase);
+
+    getElementBaseStyle = (element) => {
+        var props = element.props;
+        if (props == null || props === "undefined") {
+            return null;
+        }
+        var baseStyle = props.elementsBaseStyle;
+        if (baseStyle == null || baseStyle === "undefined") {
+            return null;
+        }
+        return baseStyle;
+    }
+
+    createChild = (baseChildren, index) => {
+        var baseStyle = this.getElementBaseStyle(baseChildren);
+
+        var style = {...baseStyle, ...this.state[ELEMENT_STYLE_PREFIX + index]};
+
+        return (<div    id="swiper-component-new-element" 
+                        key={index} 
+                        style={style}>{baseChildren}</div>);
+    }
+
+    createChildren = () => {
+        var childrenBase = this.state.children;
         var children = childrenBase.map((c, index) => this.createChild(c, index));
         return children;
     }
@@ -123,17 +141,10 @@ class Swiper extends Component {
         return (this.state.swipePanelIndex < (this.props.children.length - 1) ? "arrow " : "arrow-disabled ") + "right-arrow";
     }
 
-    //componentDidMount = () => {
-        //var panels = this.createChildren();
-        //this.setState({panelStyles: this.panelStyles, panels: panels});
-    //}
-
     render () {
-        console.log('render.this.props.children', this.props.children);
+        const children = this.createChildren();
+        const title = this.getCurrentTitle();
 
-        const title = this.getTitle(0);
-        const children = this.createChildren([].concat(this.props.children));
-        //console.log('children', children);
         return (
             <div id="swiper-component-container" {...this.props} onTouchMove={this.onTouchMoveHandler}>
                 <div id="swiper-component-header">
