@@ -76,23 +76,59 @@ class Scheduler extends Component {
 
     }
 
+    getResourceName = () => {
+        return this.props.resource != null && this.props.resource !== "undefined" ? this.props.resource.name : "NO RESOURCE";
+    }
+
+    getTimeZones = () => {
+        var timeZones = this.state.timeZones.map((timeZone, index) => 
+                            <TimeZone   timeZone={timeZone} 
+                                        resource={{name: this.getResourceName()}} 
+                                        onAcceptReserve={this.props.onAcceptReserve} 
+                                        key={index}/>
+                        );
+        console.log('timeZones', timeZones);
+
+        var scheduler = null;
+        if (timeZones != null && timeZones !== "undefined" && Array.isArray(timeZones) && timeZones.length > 0) {
+            scheduler = React.createElement('div', {id: "scheduler-component-container", children: timeZones});
+        }
+        console.log('scheduler', scheduler);
+        return scheduler;
+    }
+y
     componentDidMount = () => { 
         this.loadScheduleForDate();
     }
 
     render() {
-//        return (
-//            <div id="scheduler-component-container" style={{displa: this.props.hide ? "none" : ""}} {...this.props}>
-//                {this.state.timeZones.map((timeZone, index) => <TimeZone timeZone={timeZone} resource={{name: this.props.resource.name}} onAcceptReserve={this.props.onAcceptReserve} key={index}/>)}
-//            </div>
-//        );
 
+        const timeZones = this.getTimeZones();
+
+/*
         return (
-            <Swiper style={{width: "100%", height: "150px"}}>
+            <div id="scheduler-component-container">
+                {this.getTimeZones()}
+            </div>
+        );
+*/
+
+/*
+        return (
+            <Swiper style={{width: "100%", height: "auto"}}>
                 <div title="First title" className="scheduler-component-swiper-panel" style={{background: "green"}}/>
                 <div title="Second title" className="scheduler-component-swiper-panel" style={{background: "blue"}}/>
-                <div title="Second title" className="scheduler-component-swiper-panel" style={{background: "yellow"}}/>
+                <div title="Thirth title" className="scheduler-component-swiper-panel" style={{background: "yellow"}}/>
             </Swiper>
+        );
+*/
+
+        return (
+            timeZones != null ? 
+                                <Swiper style={{width: "100%", height: "auto"}}>
+                                        {timeZones}
+                                </Swiper> :
+                                <div>No time zones</div>
         );
 
     }
