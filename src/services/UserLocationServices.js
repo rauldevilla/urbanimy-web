@@ -77,75 +77,160 @@ export const getUserResourceTypesByTypeId = (resourceTypeId, onSuccess, onError)
     onSuccess(resources != null && resources !== 'undefined' && resources.length > 0 ? resources : []);
 }
 
-export const getResourcesScheduleForDate = (date, onSuccess, onError) => {
+export const getResourcesScheduleForDate = (resourceIds, date, onSuccess, onError) => {
 
     onSuccess(
         {
-        date: new Date(),
-        schedule: [
+            date: new Date(),
+            resources:
+            [
                 {
-                    hour: 5,
-                    status: "occupied"
+                    resource: 
+                    {
+                        id: "RES002",
+                        resourceTypeId: "RT002",
+                        name: "Banda Gimnasio 1"
+                    },
+                    schedule: [
+                        {
+                            hour: 5,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 6,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 7,
+                            status: "free"
+                        },
+                        {
+                            hour: 8,
+                            status: "free"
+                        },
+                        {
+                            hour: 9,
+                            status: "free"
+                        },
+                        {
+                            hour: 10,
+                            status: "free"
+                        },
+                        {
+                            hour: 11,
+                            status: "free"
+                        },
+                        {
+                            hour: 12,
+                            status: "free"
+                        },
+                        {
+                            hour: 13,
+                            status: "free"
+                        },
+                        {
+                            hour: 14,
+                            status: "free"
+                        },
+                        {
+                            hour: 15,
+                            status: "free"
+                        },
+                        {
+                            hour: 16,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 17,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 18,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 19,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 20,
+                            status: "free"
+                        }
+                    ]
                 },
                 {
-                    hour: 6,
-                    status: "occupied"
-                },
-                {
-                    hour: 7,
-                    status: "free"
-                },
-                {
-                    hour: 8,
-                    status: "free"
-                },
-                {
-                    hour: 9,
-                    status: "free"
-                },
-                {
-                    hour: 10,
-                    status: "free"
-                },
-                {
-                    hour: 11,
-                    status: "free"
-                },
-                {
-                    hour: 12,
-                    status: "free"
-                },
-                {
-                    hour: 13,
-                    status: "free"
-                },
-                {
-                    hour: 14,
-                    status: "free"
-                },
-                {
-                    hour: 15,
-                    status: "free"
-                },
-                {
-                    hour: 16,
-                    status: "occupied"
-                },
-                {
-                    hour: 17,
-                    status: "occupied"
-                },
-                {
-                    hour: 18,
-                    status: "occupied"
-                },
-                {
-                    hour: 19,
-                    status: "occupied"
-                },
-                {
-                    hour: 20,
-                    status: "free"
+                    resource: 
+                    {
+                        id: "RES003",
+                        resourceTypeId: "RT002",
+                        name: "Banda Gimnasio 2"
+                    },
+                    schedule: [
+                        {
+                            hour: 5,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 6,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 7,
+                            status: "free"
+                        },
+                        {
+                            hour: 8,
+                            status: "free"
+                        },
+                        {
+                            hour: 9,
+                            status: "free"
+                        },
+                        {
+                            hour: 10,
+                            status: "free"
+                        },
+                        {
+                            hour: 11,
+                            status: "free"
+                        },
+                        {
+                            hour: 12,
+                            status: "free"
+                        },
+                        {
+                            hour: 13,
+                            status: "free"
+                        },
+                        {
+                            hour: 14,
+                            status: "free"
+                        },
+                        {
+                            hour: 15,
+                            status: "free"
+                        },
+                        {
+                            hour: 16,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 17,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 18,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 19,
+                            status: "occupied"
+                        },
+                        {
+                            hour: 20,
+                            status: "free"
+                        }
+                    ]
                 }
             ]
         }

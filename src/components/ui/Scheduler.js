@@ -31,7 +31,9 @@ class Scheduler extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            timeZones: []
+            timeZones: [],
+            resources: props.resources != null ? [].concat(props.resources) : [],
+            resourcesTimeZones: []
         };
     }
 
@@ -57,9 +59,34 @@ class Scheduler extends Component {
 
 
     loadScheduleForDate = () => {
+
+        if (this.state.resources.length == 0) {
+            return;
+        }
+
         var scheduleDate = new Date();
-        getResourcesScheduleForDate(scheduleDate, 
+        getResourcesScheduleForDate(this.state.resources, scheduleDate, 
                 (scheduleData) => {
+                    var resourcesTimeZones = [];
+                    scheduleData.resources.forEach((resourceItem, index) => {
+                        resourcesTimeZones[index].resource = resourceItem.resource;
+
+                        var baseSchedule = this.getBaseSchedule();
+                        resourceItem.schedule.forEach(timeZoneData => {
+                            var base = baseSchedule.find(element => element.value === timeZoneData.hour);
+                            if (base != null && base !== "undefined") {
+                                base.status = timeZoneData.status;
+                            }
+                        });
+
+                        resourcesTimeZones[index].timeZone = {
+                                name: scheduleData.resource.name,
+                                timeZones: baseSchedule
+                            };
+                    });
+                    this.setState({resourcesTimeZones: resourcesTimeZones});
+
+                    /*
                     var baseSchedule = this.getBaseSchedule();
                     scheduleData.schedule.forEach(timeZoneData => {
                         var base = baseSchedule.find(element => element.value === timeZoneData.hour);
@@ -68,6 +95,7 @@ class Scheduler extends Component {
                         }
                     });
                     this.setState({timeZones: baseSchedule});
+                    */
                 },
                 (error) => {
                     console.error(error);
@@ -80,8 +108,8 @@ class Scheduler extends Component {
         return this.props.resource != null && this.props.resource !== "undefined" ? this.props.resource.name : "NO RESOURCE";
     }
 
-    getTimeZones = () => {
-        var timeZones = this.state.timeZones.map((timeZone, index) => 
+    getTimeZones = (resourcesTimeZone) => {
+        var timeZones = resourcesTimeZone.timeZones.map((timeZone, index) => 
                             <TimeZone   timeZone={timeZone} 
                                         resource={{name: this.getResourceName()}} 
                                         onAcceptReserve={this.props.onAcceptReserve} 
@@ -93,7 +121,7 @@ class Scheduler extends Component {
             scheduler = React.createElement('div', 
                                     {
                                         id: "scheduler-component-container", 
-                                        title: "DUMMY TIMEZONE", 
+                                        title: resourcesTimeZone.name, 
                                         children: timeZones, 
                                         elementsBaseStyle: 
                                                     {
@@ -105,14 +133,23 @@ class Scheduler extends Component {
 
         return scheduler;
     }
-y
+
+    getTimeZonesForResources = () => {
+        var timeZonesForResources = this.state.resourcesTimeZones.map((resource, index) => {
+                                        this.getTimeZones(resource)
+                                    });
+        //var resourceTimeZones = this.getTimeZones();
+        console.log('timeZonesForResources', timeZonesForResources);
+        return timeZonesForResources;
+    }
+
     componentDidMount = () => { 
         this.loadScheduleForDate();
     }
 
     render() {
 
-        const timeZones = this.getTimeZones();
+        const timeZones = this.getTimeZonesForResources();
 
 /*
         return (
@@ -127,8 +164,7 @@ y
         return (
             timeZones != null ? 
                                 <Swiper>
-                                        {timeZones}
-                                        {timeZones}
+                                    {timeZones}
                                 </Swiper> :
                                 <div style={{color: "red", size: "Large"}}>No time zones</div>
         );

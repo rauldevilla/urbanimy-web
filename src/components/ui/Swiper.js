@@ -153,7 +153,6 @@ class Swiper extends Component {
                     <div id="right" onClick={this.rightClickHandle}><i className={this.getRightArrowClass()}></i></div>
                 </div>
                 <div id="swiper-component-body">
-                    {/*this.props.children*/}
                     {children}
                 </div>
             </div>
