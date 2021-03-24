@@ -69,7 +69,7 @@ class Scheduler extends Component {
                 (scheduleData) => {
                     var resourcesTimeZones = [];
                     scheduleData.resources.forEach((resourceItem, index) => {
-                        resourcesTimeZones[index].resource = resourceItem.resource;
+                        resourcesTimeZones[index] = {resource: resourceItem.resource};
 
                         var baseSchedule = this.getBaseSchedule();
                         resourceItem.schedule.forEach(timeZoneData => {
@@ -80,10 +80,11 @@ class Scheduler extends Component {
                         });
 
                         resourcesTimeZones[index].timeZone = {
-                                name: scheduleData.resource.name,
+                                name: resourceItem.resource.name,
                                 timeZones: baseSchedule
                             };
                     });
+
                     this.setState({resourcesTimeZones: resourcesTimeZones});
 
                     /*
@@ -104,14 +105,13 @@ class Scheduler extends Component {
 
     }
 
-    getResourceName = () => {
-        return this.props.resource != null && this.props.resource !== "undefined" ? this.props.resource.name : "NO RESOURCE";
-    }
-
     getTimeZones = (resourcesTimeZone) => {
-        var timeZones = resourcesTimeZone.timeZones.map((timeZone, index) => 
-                            <TimeZone   timeZone={timeZone} 
-                                        resource={{name: this.getResourceName()}} 
+
+        console.log('resourcesTimeZone', resourcesTimeZone);
+
+        var timeZones = resourcesTimeZone.timeZone.timeZones.map((t, index) => 
+                            <TimeZone   timeZone={t} 
+                                        resource={{name: t.name}} 
                                         onAcceptReserve={this.props.onAcceptReserve} 
                                         key={index}/>
                         );
@@ -121,7 +121,7 @@ class Scheduler extends Component {
             scheduler = React.createElement('div', 
                                     {
                                         id: "scheduler-component-container", 
-                                        title: resourcesTimeZone.name, 
+                                        title: resourcesTimeZone.resource.name, 
                                         children: timeZones, 
                                         elementsBaseStyle: 
                                                     {
