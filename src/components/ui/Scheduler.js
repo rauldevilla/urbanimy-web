@@ -60,7 +60,7 @@ class Scheduler extends Component {
 
     loadScheduleForDate = () => {
 
-        if (this.state.resources.length == 0) {
+        if (this.state.resources.length === 0) {
             return;
         }
 
@@ -136,7 +136,7 @@ class Scheduler extends Component {
 
     getTimeZonesForResources = () => {
         var timeZonesForResources = this.state.resourcesTimeZones.map((resource, index) => {
-                                        this.getTimeZones(resource)
+                                        return this.getTimeZones(resource)
                                     });
         //var resourceTimeZones = this.getTimeZones();
         console.log('timeZonesForResources', timeZonesForResources);

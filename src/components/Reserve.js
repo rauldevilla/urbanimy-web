@@ -28,7 +28,7 @@ class Reserve extends Component {
             userAvailableLocations: [],
             userAvailableResourcesTypes: [],
             resourcesArray: [],
-            showScheduler: false
+            hasSchedules: false
         };
     }
 
@@ -82,11 +82,24 @@ class Reserve extends Component {
     }
 
     onSearchAvailabilityClick = (event) => {
-        this.setState({showScheduler: true});
+        this.setState({hasSchedules: this.hasResources()});
     }
 
     onAcceptReserveHandler = (reserve) => {
         console.log('reserve', reserve);
+    }
+
+    hasResources = () => {
+        var hasIt = this.state.resourcesArray != null && 
+                    this.state.resourcesArray !== "undefined";
+        if (Array.isArray(this.state.resourcesArray)) {
+            hasIt = hasIt && this.state.resourcesArray.length > 0;
+        }
+        return hasIt;
+    }
+
+    hasSchedules = () => {
+        return this.state.hasSchedules;
     }
 
     componentDidMount = () => {
@@ -135,12 +148,12 @@ class Reserve extends Component {
 
                     <Row>
                         <Col size="L" style={{textAlign: "center"}}>
-                            <Button style={{margin: "15px"}} onClick={this.onSearchAvailabilityClick} type="submit">{this.internationalization.getLabel('search-availability')}</Button>
+                            <Button disabled={!this.hasResources()} style={{margin: "15px"}} onClick={this.onSearchAvailabilityClick} type="submit">{this.internationalization.getLabel('search-availability')}</Button>
                         </Col>
                     </Row>
                 </div>
                 <div id="reserve-component-scheduler-container">
-                    {this.state.showScheduler ? <Scheduler resources={this.state.resourcesArray} onAcceptReserve={this.onAcceptReserveHandler}/>: null}
+                    {this.hasSchedules() ? <Scheduler resources={this.state.resourcesArray} onAcceptReserve={this.onAcceptReserveHandler}/>: null}
                 </div>
                 <div id="reserve-component-bottom-margin"></div>
             </div>

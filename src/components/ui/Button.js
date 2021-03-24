@@ -4,7 +4,7 @@ class Button extends Component {
 
 
     isDisable = () => {
-        return "disabled" === this.props.type;
+        return this.props.disabled;
     }
 
     getClassName = () => {

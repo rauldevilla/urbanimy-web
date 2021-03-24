@@ -75,9 +75,13 @@ export const getUserResourceTypesInLocation = (locationId, onSuccess, onError) =
 export const getUserResourceTypesByTypeId = (resourceTypeId, onSuccess, onError) => {
     var resources = USER_RESOURCES_BY_LOCATION[0].resources.filter((resource) => resource.resourceTypeId === resourceTypeId);
     onSuccess(resources != null && resources !== 'undefined' && resources.length > 0 ? resources : []);
-}
+};
 
-export const getResourcesScheduleForDate = (resourceIds, date, onSuccess, onError) => {
+export const getResourcesScheduleForDate = (resources, date, onSuccess, onError) => {
+
+
+    //TODO: Use to send request
+    var idsArray = resources.map(r => r.id);
 
     onSuccess(
         {
@@ -237,3 +241,4 @@ export const getResourcesScheduleForDate = (resourceIds, date, onSuccess, onErro
     );
 
 };
+
